@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Controllers;
+
+
+use CodeIgniter\Controller;
+use App\Models\BarangModel;
+
+class Barang extends BaseController
+{
+
+    public function __construct()
+	{
+		helper(['form', 'url']);
+		$this->ajaxForm = new Ajaxform();
+	}
+
+    public function index()
+    {
+        return view("Datamaster/v_barang");
+    }
+
+    public function store()
+	{
+		$data = [
+			'nama_barang' => $this->request->getVar('nama_barang'),
+			'harga_barang' => $this->request->getVar('harga_barang'),
+			'satuan' => $this->request->getVar('satuan'),
+			// 'id_cabang' => $this->request->getVar('id_cabang'),
+		];
+
+		$result = $this->ajaxForm->save($data);
+		if ($result) {
+			return $this->response->setJSON(['status' => 'success', 'message' => 'Berhasil menambahkan barang']);
+		}
+		return $this->response->setJSON(['status' => 'failed', 'message' => 'Gagal menambahkan barang']);
+	}
+
+}
