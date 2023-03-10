@@ -32,7 +32,7 @@ Abude - Data Barang
                     </div>
                 </div>
                                         <!-- Modal -->
-                                        <div class="modal fade" id="modalTambah">
+                                    <div class="modal fade" id="modalTambah">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -64,7 +64,7 @@ Abude - Data Barang
                                     </form>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-danger light" data-dismiss="modal">Kembali</button>
-                                                    <button type="button" id="submit-btn" onclick="submitHandler()" class="btn btn-primary">Simpan</button>
+                                                    <button type="button" id="submit-btn" class="btn btn-primary">Simpan</button>
                                                 </div>
                                             </div>
                                         </div>

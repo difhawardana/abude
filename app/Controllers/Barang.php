@@ -12,7 +12,7 @@ class Barang extends BaseController
     public function __construct()
 	{
 		helper(['form', 'url']);
-		$this->ajaxForm = new Ajaxform();
+		$this->barangModel = new BarangModel();
 	}
 
     public function index()
@@ -29,7 +29,7 @@ class Barang extends BaseController
 			// 'id_cabang' => $this->request->getVar('id_cabang'),
 		];
 
-		$result = $this->ajaxForm->save($data);
+		$result = $this->barangModel->save($data);
 		if ($result) {
 			return $this->response->setJSON(['status' => 'success', 'message' => 'Berhasil menambahkan barang']);
 		}
