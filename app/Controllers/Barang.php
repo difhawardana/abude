@@ -8,18 +8,18 @@ use App\Models\BarangModel;
 class Barang extends BaseController
 {
 
-    public function __construct()
+	public function __construct()
 	{
 		helper(['form', 'url']);
 		$this->barangModel = new BarangModel();
 	}
 
-    public function index()
-    {
-        return view("Datamaster/v_barang");
-    }
+	public function index()
+	{
+		return view("Datamaster/v_barang");
+	}
 
-    public function store()
+	public function store()
 	{
 		$data = [
 			'nama_barang' => $this->request->getVar('nama_barang'),
@@ -34,5 +34,4 @@ class Barang extends BaseController
 		}
 		return $this->response->setJSON(['status' => 'failed', 'message' => 'Gagal menambahkan barang']);
 	}
-
 }
