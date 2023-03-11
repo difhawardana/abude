@@ -69,6 +69,7 @@ Abude - Data Barang
                                         </div>
                                         <form id="form-tambah" method="post">
                                             <div class="modal-body">
+                                                <input type="hidden" name="id_cabang" value="<?= session('id_cabang') ?>">
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="nama_barang" class="form-label">Nama Barang</label>
@@ -142,32 +143,45 @@ Abude - Data Barang
         $('#alert-sukses').hide();
         $('#alert-gagal').hide();
 
-        $('#table_barang').DataTable({
-            ajax: {
-                url: '<?= base_url() ?>API/Barang',
-                dataSrc: ''
-            },
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            type: "GET",
-            columns: [{
-                    data: 'id_barang'
-                },
-                {
-                    data: 'nama_barang'
-                },
-                {
-                    data: 'harga_barang'
-                },
-                {
-                    data: 'satuan'
-                },
-            ],
-        })
+
     });
 
+    var table = $('#table_barang').DataTable({
+        ajax: {
+            url: '<?= base_url() ?>API/Barang',
+            dataSrc: ''
+        },
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        type: "GET",
+        columns: [{
+                data: 'id_barang'
+            },
+            {
+                data: 'nama_barang'
+            },
+            {
+                data: 'harga_barang'
+            },
+            {
+                data: 'satuan'
+            },
+        ],
+    })
+
+    function convertFormToJSON(form) {
+        return $(form).serializeArray().reduce(function(json, {
+            name,
+            value
+        }) {
+            json[name] = value;
+            return json;
+        }, {})
+    }
+
     function tambahData() {
-        var data_post = $('#form-tambah').serialize();
+        var data_post = convertFormToJSON($('#form-tambah'))
+        console.log(data_post);
         $.ajax({
             method: "POST",
             url: "<?= base_url() ?>API/Barang",

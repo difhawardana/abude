@@ -58,6 +58,7 @@ class Auth extends BaseController
             'id_user' => $find->id_user,
             'username' => $find->username,
             'role'     => $find->role,
+            'id_cabang' => $find->id_cabang
         ];
 
         $session->set($data);
@@ -77,5 +78,4 @@ class Auth extends BaseController
         $session->destroy();
         return redirect()->to('Auth/login');
     }
-
 }

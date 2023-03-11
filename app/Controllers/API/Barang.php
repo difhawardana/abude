@@ -59,13 +59,15 @@ class Barang extends ResourceController
                 'nama_barang' => $json->nama_barang,
                 'harga_barang' => $json->harga_barang,
                 'satuan' => $json->satuan,
+                'id_cabang' => $json->id_cabang
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
                 'nama_barang' => $input['nama_barang'],
                 'harga_barang' => $input['harga_barang'],
-                'satuan' => $input['satuan']
+                'satuan' => $input['satuan'],
+                'id_cabang' => $input['id_cabang']
             ];
         }
         $model->insert($data);
