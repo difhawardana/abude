@@ -20,7 +20,6 @@ Abude - Data Barang
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
                     <h4>Selamat datang Kembali!</h4>
-                    <span>Mohon isikan dengan hati-hati</span>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -69,6 +68,7 @@ Abude - Data Barang
                                         </div>
                                         <form id="form-tambah" method="post">
                                             <div class="modal-body">
+                                                <input type="hidden" name="id_cabang" value="<?= session('id_cabang') ?>">
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="nama_barang" class="form-label">Nama Barang</label>
@@ -96,6 +96,46 @@ Abude - Data Barang
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalEdit">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Barang</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                            </button>
+                                        </div>
+                                        <form id="form-edit" method="post">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id_barang" id="id_barang_edit">
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="nama_barang_edit" class="form-label">Nama Barang</label>
+                                                        <input type="text" id="nama_barang_edit" name="nama_barang" class="form-control" placeholder="Nama barang" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="harga_barang_edit" class="form-label">Harga Barang (Rupiah)</label>
+                                                        <input type="text" id="harga_barang_edit" name="harga_barang" class="form-control" placeholder="Harga barang" />
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="satuan_edit" class="form-label">Satuan</label>
+                                                        <input type="text" id="satuan_edit" name="satuan" class="form-control" placeholder="Satuan" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
+                                                <button type="button" onclick="updateData()" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </h5>
                     </div>
 
@@ -104,10 +144,10 @@ Abude - Data Barang
                             <table class="table" id="table_barang" style="min-width: 845px">
                                 <thead>
                                     <tr>
-                                        <th>No. </th>
                                         <th>Nama barang</th>
                                         <th>Harga Barang</th>
                                         <th>Satuan</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-border-bottom-0">
@@ -142,32 +182,52 @@ Abude - Data Barang
         $('#alert-sukses').hide();
         $('#alert-gagal').hide();
 
-        $('#table_barang').DataTable({
-            ajax: {
-                url: '<?= base_url() ?>API/Barang',
-                dataSrc: ''
-            },
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            type: "GET",
-            columns: [{
-                    data: 'id_barang'
-                },
-                {
-                    data: 'nama_barang'
-                },
-                {
-                    data: 'harga_barang'
-                },
-                {
-                    data: 'satuan'
-                },
-            ],
-        })
+
     });
 
+    var table = $('#table_barang').DataTable({
+        ajax: {
+            url: '<?= base_url() ?>API/Barang',
+            dataSrc: ''
+        },
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        type: "GET",
+        columns: [{
+                data: 'nama_barang'
+            },
+            {
+                data: 'harga_barang'
+            },
+            {
+                data: 'satuan'
+            },
+            {
+                data: 'id_barang',
+                render: function(data, type, row) {
+
+                    return '<div class="d-flex">					<button type="button" onclick="editData(' + data + ')" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>		<button type="button" onclick="hapusData(' + data + ')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button> </div>'
+                }
+            },
+        ],
+    })
+
+    function convertFormToJSON(form) {
+        return $(form).serializeArray().reduce(function(json, {
+            name,
+            value
+        }) {
+            json[name] = value;
+            return json;
+        }, {})
+    }
+
+    function getData(id) {
+
+    }
+
     function tambahData() {
-        var data_post = $('#form-tambah').serialize();
+        var data_post = convertFormToJSON($('#form-tambah'))
         $.ajax({
             method: "POST",
             url: "<?= base_url() ?>API/Barang",
@@ -184,14 +244,11 @@ Abude - Data Barang
         })
     }
 
-    function hapusData() {
+    function hapusData(id) {
         $.ajax({
+                url: "<?= base_url(); ?>API/Barang/" + id,
                 method: "DELETE",
-                url: "<?= base_url(); ?>API/Barang",
-                data: {
-                    id: id
-                },
-                dataType: "json"
+                contentType: "application/json"
             })
             .done(function(response) {
                 if (response.status) {
@@ -206,26 +263,24 @@ Abude - Data Barang
     function editData(id) {
         $('#modalEdit').modal('toggle');
         $.ajax({
-                method: "POST",
-                url: "<?= base_url('Pengaturan/getPaket'); ?>",
-                data: {
-                    id: id
-                },
+                method: "GET",
+                url: "<?= base_url(); ?>API/Barang/" + id,
                 dataType: "json"
             })
             .done(function(response) {
-                $('#id_paket_edit').val(response.id_paket)
-                $('#nama_paket_edit').val(response.nama_paket)
-                $('#harga_per_kg_edit').val(response.harga_per_kg)
-                $('#modalEdit').modal('toggle');
+                $('#id_barang_edit').val(response[0].id_barang)
+                $('#nama_barang_edit').val(response[0].nama_barang)
+                $('#harga_barang_edit').val(response[0].harga_barang)
+                $('#satuan_edit').val(response[0].satuan)
             });
     }
 
-    function simpanData() {
-        var data_post = $('#form-edit').serialize();
+    function updateData() {
+        var data_post = convertFormToJSON($('#form-edit'))
         $.ajax({
-                method: "POST",
-                url: "<?= base_url('Pengaturan/editPaket'); ?>",
+                method: "PUT",
+                url: "<?= base_url(); ?>/API/Barang/" + data_post['id_barang'],
+                contentType: "application/json",
                 data: data_post,
                 dataType: "json"
             })

@@ -2,11 +2,11 @@
 
 namespace App\Controllers\API;
 
-use App\Models\BarangModel;
+use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class Barang extends ResourceController
+class User extends ResourceController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -15,7 +15,7 @@ class Barang extends ResourceController
      */
     public function index()
     {
-        $model = new BarangModel();
+        $model = new UserModel();
         $data = $model->findAll();
         return $this->respond($data, 200);
     }
@@ -27,12 +27,12 @@ class Barang extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new BarangModel();
-        $data = $model->getWhere(['id_barang'  => $id])->getResult();
+        $model = new UserModel();
+        $data = $model->getWhere(['id_user' => $id])->getResult();
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Barang dengan id tersebut tidak ditemukan');
+            return $this->failNotFound('User dengan id tersebut tidak ditemukan');
         }
     }
 
@@ -52,22 +52,25 @@ class Barang extends ResourceController
      */
     public function create()
     {
-        $model = new BarangModel();
+        $model = new UserModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
-                'nama_barang' => $json->nama_barang,
-                'harga_barang' => $json->harga_barang,
-                'satuan' => $json->satuan,
-                'id_cabang' => $json->id_cabang
+                'username' => $json->username,
+                'password' => $json->password,
+                'role' => $json->role,
+                'id_cabang' => $input->id_cabang,
+                'id_perusahaan' => $input->id_perusahaan,
+
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'nama_barang' => $input['nama_barang'],
-                'harga_barang' => $input['harga_barang'],
-                'satuan' => $input['satuan'],
-                'id_cabang' => $input['id_cabang']
+                'username' => $input['username'],
+                'password' => $input['password'],
+                'role' => $input['role'],
+                'id_cabang' => $input['id_cabang'],
+                'id_persahaan' => $input['id_perusahaan'],
             ];
         }
         $model->insert($data);
@@ -75,7 +78,7 @@ class Barang extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Barang berhasil ditambah.'
+                'success' => 'User berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);
@@ -98,20 +101,20 @@ class Barang extends ResourceController
      */
     public function update($id = null)
     {
-        $model = new BarangModel();
+        $model = new UserModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
-                'nama_barang' => $json->nama_barang,
-                'harga_barang' => $json->harga_barang,
-                'satuan' => $json->satuan,
+                'username' => $json->username,
+                'password' => $json->password,
+                'role' => $json->role,
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'nama_barang' => $input['nama_barang'],
-                'harga_barang' => $input['harga_barang'],
-                'satuan' => $input['satuan']
+                'username' => $input['username'],
+                'password' => $input['password'],
+                'role' => $input['role'],
             ];
         }
         $model->update($id, $data);
@@ -119,7 +122,7 @@ class Barang extends ResourceController
             'status' => 200,
             'error' => null,
             'messages' => [
-                'success' => 'Berhasil mengupdate barang!'
+                'success' => 'Berhasil mengupdate User!'
             ],
         ];
         return $this->respond($response);
@@ -132,7 +135,7 @@ class Barang extends ResourceController
      */
     public function delete($id = null)
     {
-        $model = new BarangModel();
+        $model = new UserModel();
         $data = $model->find($id);
         if ($data) {
             $model->delete($id);
@@ -140,13 +143,13 @@ class Barang extends ResourceController
                 'status' => 200,
                 'error' => null,
                 'messages' => [
-                    'success' => 'Barang berhasil dihapus'
+                    'success' => 'User berhasil dihapus'
                 ]
             ];
 
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Barang dengan id tersebut tidak ditemukan!');
+            return $this->failNotFound('User dengan id tersebut tidak ditemukan!');
         }
     }
 }

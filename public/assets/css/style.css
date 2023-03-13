@@ -25630,10 +25630,10 @@ table.dataTable.style-1 thead th {
     transform: translateY(-50%); }
 
 .dataTables_wrapper .dataTables_paginate {
-  display: flex; }
+  display: flex-end; }
   .dataTables_wrapper .dataTables_paginate .paginate_button {
-    height: 48px;
-    width: 48px;
+    /* height: 48px; */
+    /* width: 48px; */
     padding: 0;
     margin: 0 5px;
     border: 0 !important;
@@ -25678,7 +25678,7 @@ table.dataTable.style-1 thead th {
 
 .dataTables_wrapper input[type="search"], .dataTables_wrapper input[type="text"], .dataTables_wrapper select {
   border: 1px solid #e2e2e2;
-  padding: .3rem 0.5rem;
+  /* padding: .3rem 0.5rem; */
   color: #715d5d;
   border-radius: 5px; }
   [data-theme-version="dark"] .dataTables_wrapper input[type="search"], [data-theme-version="dark"] .dataTables_wrapper input[type="text"], [data-theme-version="dark"] .dataTables_wrapper select {

@@ -6,9 +6,9 @@ use CodeIgniter\Model;
 
 class BarangModel extends Model
 {
-    protected $table            = 'cabang';
-    protected $primaryKey       = 'id_cabang';
-    protected $allowedFields    = ['id_perusahaan','nama_barang','kode','kode'];
+    protected $table            = 'barang';
+    protected $primaryKey       = 'id_barang';
+    protected $allowedFields    = ['nama_barang','harga_barang','satuan','id_cabang'];
 
     // // Validation
     // protected $validationRules      = [

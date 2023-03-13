@@ -114,10 +114,10 @@
                             <span class="nav-text">Data Master</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?= base_url('Dashboard') ?>">Dashboard</a></li>
-                            <li><a href="<?= base_url('Barang') ?>">List Barang</a></li>
-                            <li><a href="<?= base_url('Cabang') ?>">List Cabang</a></li>
-                            <li><a href="<?= base_url() ?>assets/tranasactions.html">User</a></li>
+                            <li><a href="<?= base_url('Dashboard')?>">Dashboard</a></li>
+                            <li><a href="<?= base_url('Barang')?>">List Barang</a></li>
+                            <li><a href="<?= base_url('Cabang')?>">List Cabang</a></li>
+                            <li><a href="<?= base_url('User') ?>">User</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
@@ -125,8 +125,8 @@
                             <span class="nav-text">Aktivitas</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?= base_url() ?>assets/table-bootstrap-basic.html">Transaksi</a></li>
-                            <li><a href="<?= base_url() ?>assets/table-datatable-basic.html">Pengeluaran</a></li>
+                            <li><a href="<?= base_url() ?>">Transaksi</a></li>
+                            <li><a href="<?= base_url() ?>">Pengeluaran</a></li>
                         </ul>
                     </li>
             </div>
