@@ -21,16 +21,17 @@ class Transaksi extends BaseController
     public function store()
 	{
 		$data = [
-			'username' => $this->request->getVar('username'),
-			'password' => $this->request->getVar('password'),
-			'role' => $this->request->getVar('role'),
+			'kode_transaksi' => $this->request->getVar('kode_transaksi'),
+			'tanggal' => $this->request->getVar('tanggal'),
+			'jam' => $this->request->getVar('jam'),
+			'total_harga' => $this->request->getVar('total_harga'),
+			'total_jumlah' => $this->request->getVar('total_jumlah'),
 		];
 
-		$result = $this->UserModel->save($data);
+		$result = $this->transaksiModel->save($data);
 		if ($result) {
-			return $this->response->setJSON(['status' => 'success', 'message' => 'Berhasil menambahkan barang']);
+			return $this->response->setJSON(['status' => 'success', 'message' => 'Transaksi berhasil ditambahkan']);
 		}
-		return $this->response->setJSON(['status' => 'failed', 'message' => 'Gagal menambahkan barang']);
+		return $this->response->setJSON(['status' => 'failed', 'message' => 'Gagal menambahkan transaksi baru']);
 	}
-
 }

@@ -9,7 +9,7 @@ class UserModel extends Model
     protected $table            = 'user';
     protected $primaryKey       = 'id_user';
     protected $returnType       = 'object';
-    protected $allowedFields    = ['username','password','role','id_cabang','id_perusahaan'];
+    protected $allowedFields    = ['username','password','role','id_cabang','id_perusahaan','created_at'];
 
     // // Dates
     // protected $useTimestamps = false;

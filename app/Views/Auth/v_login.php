@@ -34,19 +34,23 @@ $validation = \Config\Services::validation();
 										<img src="<?= base_url() ?>/assets/images/abude_logo.png" alt="">
 									</div>
                                     <h4 class="text-center mb-4">Silahkan Melakukan Login</h4>
-                                    <form method="POST" action="<?= base_url('Auth/loginUser') ?>">
+
+                                    <form class="form-valide" method="POST" action="<?= base_url('Auth/loginUser') ?>">
                                         <div class="form-group">
-                                            <label for="username" class="mb-1"><strong>Username</strong></label>
-                                            <input id="username" type="text" class="form-control" name="username" tabindex="1"
-                                            placeholder="username">
+                                            <label for="username" class="mb-1"><strong>Username</strong>
+                                            <span class="text-danger">*</span></label>
+                                            <input value="<?= old('username') ?>" type="text" class="form-control" name="username" tabindex="1"
+                                                placeholder="username">
                                             <div class="invalid-feedback" style="display: block">
                                                 <?= $validation->getError('username') ?>
                                             </div>
                                         </div>
+
                                         <div class="form-group">
-                                            <label for="password" class="mb-1"><strong>Password</strong></label>
+                                            <label for="password" class="mb-1"><strong>Password</strong>
+                                            <span class="text-danger">*</span></label>
                                             <input value="<?= old('password') ?>" id="password" type="password" class="form-control" name="password" tabindex="2"
-                                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;">
+                                            placeholder="password">
                                             <div class="invalid-feedback" style="display: block">
                                                 <?= $validation->getError('password') ?>
                                             </div>
@@ -58,6 +62,9 @@ $validation = \Config\Services::validation();
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Masuk</button>
                                         </div>
+                                        <?php if (session()->getFlashData('error')) : ?>
+                                                <?= session()->getFlashData('error') ?>
+                                            <?php endif; ?>
                                     </form>
                                 </div>
                             </div>
@@ -72,6 +79,7 @@ $validation = \Config\Services::validation();
         Scripts
     ***********************************-->
     <!-- Required vendors -->
+    <!-- <script src="<?= base_url() ?>/vendor/jquery-validation/jquery.validate.min.js"></script> -->
     <script src="<?= base_url() ?>/assets/vendor/global/global.min.js"></script>
 	<script src="<?= base_url() ?>/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>/assets/js/custom.min.js"></script>

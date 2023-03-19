@@ -58,12 +58,13 @@ class Auth extends BaseController
             'id_user' => $find->id_user,
             'username' => $find->username,
             'role'     => $find->role,
-            'id_cabang' => $find->id_cabang
+            'id_cabang' => $find->id_cabang,
+            'id_perusahaan' => $find->id_perusahaan
         ];
 
         $session->set($data);
 
-        if ($find->role == 'SuperAdmin') {
+        if ($find->role == true) {
             return redirect()->to('Dashboard');
         }
 

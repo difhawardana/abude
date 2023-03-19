@@ -24,8 +24,8 @@ Abude - Data User
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="javascript:void(0)">Data Master</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">List User</a></li>
+                    <li class="breadcrumb-item"><a href="#">Data Master</a></li>
+                    <li class="breadcrumb-item active"><a href="#">List User</a></li>
                 </ol>
             </div>
         </div>
@@ -68,6 +68,7 @@ Abude - Data User
                                         </div>
                                         <form id="form-tambah" method="post">
                                             <div class="modal-body">
+                                                <input type="hidden" name="id_perusahaan" value="<?= session('id_perusahaan') ?>">
                                                 <input type="hidden" name="id_cabang" value="<?= session('id_cabang') ?>">
                                                 <div class="row">
                                                     <div class="col mb-3">
@@ -82,10 +83,14 @@ Abude - Data User
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <!-- <div class="col mb-3">
-                                                        <label for="role" class="form-label">Role</label>
-                                                        <input type="text" id="role" name="role" class="form-control" placeholder="Role" />
-                                                    </div> -->
+                                                    <div class="col mb-3">
+                                                    <label for="role" class="form-label">Role</label>
+                                                    <select id="role" name="role" class="form-control default-select form-control-lg" tabindex="-98">
+                                                        <option value="SuperAdmin">SuperAdmin</option>
+                                                        <option value="Owner">Owner</option>
+                                                        <option value="Admin Cabang">Admin Cabang</option>
+                                                    </select>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -122,11 +127,14 @@ Abude - Data User
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <!-- <div class="col mb-3">
-                                                        <label for="satuan_edit" class="form-label">Satuan</label>
-                                                        <input type="text" id="satuan_edit" name="satuan" class="form-control" placeholder="Satuan" />
+                                                    <div class="col mb-3">
+                                                    <label for="role" class="form-label">Role</label>
+                                                    <select id="role" name="role" class="form-control default-select form-control-lg" tabindex="-98">
+                                                        <option value="SuperAdmin">SuperAdmin</option>
+                                                        <option value="Admin">Admin</option>
+                                                    </select>
                                                     </div>
-                                                </div> -->
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
@@ -166,23 +174,12 @@ Abude - Data User
 
 <!-- Section Javascript -->
 <?= $this->section('script') ?>
-<script data-cfasync="false" src="<?= base_url() ?>/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script src="<?= base_url() ?>vendor/global/global.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
-<script src="<?= base_url() ?>assets/js/custom.min.js"></script>
-<script src="<?= base_url() ?>assets/js/deznav-init.js"></script>
-<script src="<?= base_url() ?>assets/js/demo.js"></script>
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#alert-sukses').hide();
         $('#alert-gagal').hide();
-
-
     });
 
     var table = $('#table_user').DataTable({
@@ -228,12 +225,14 @@ Abude - Data User
 
     function tambahData() {
         var data_post = convertFormToJSON($('#form-tambah'))
+        console.log(data_post)
         $.ajax({
             method: "POST",
             url: "<?= base_url() ?>API/User",
             data: data_post,
             dataType: "json"
         }).done(function(response) {
+            console.log(response)
             $('#modalTambah').modal('toggle');
             if (response.status) {
                 $('#alert-sukses').show();
@@ -271,6 +270,7 @@ Abude - Data User
                 $('#id_user_edit').val(response[0].id_user)
                 $('#username_edit').val(response[0].username)
                 $('#password_edit').val(response[0].password)
+                $('#role_edit').val(response[0].role)
             });
     }
 

@@ -2,7 +2,7 @@
 
 <!-- Section Title -->
 <?= $this->section('title') ?>
-Abude - Data Cabang
+Abude - List Supplier
 <?= $this->endSection() ?>
 
 <!-- Section CSS -->
@@ -25,7 +25,7 @@ Abude - Data Cabang
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="javascript:void(0)">Data Master</a></li>
-                    <li class="breadcrumb-item active"><a href="javascript:void(0)">List Cabang</a></li>
+                    <li class="breadcrumb-item active"><a href="javascript:void(0)">List Barang</a></li>
                 </ol>
             </div>
         </div>
@@ -38,7 +38,7 @@ Abude - Data Cabang
                         <polyline points="9 11 12 14 22 4"></polyline>
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                     </svg>
-                    <strong>Sukses!</strong> Menambah Cabang.
+                    <strong>Sukses!</strong> Menambah Supplier.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
@@ -54,7 +54,7 @@ Abude - Data Cabang
                 </div>
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title">List Cabang
+                        <h5 class="card-title">List Supplier
                             <button data-bs-toggle="modal" data-bs-target="#modalTambah" type="button" class="btn btn-primary">Tambah Data <span class="btn-icon-end"><i class="fa fa-plus"></i></span>
                             </button>
                             <!-- Modal -->
@@ -62,23 +62,16 @@ Abude - Data Cabang
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Tambah cabang</h5>
+                                            <h5 class="modal-title">Tambah Supplier</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal">
                                             </button>
                                         </div>
                                         <form id="form-tambah" method="post">
                                             <div class="modal-body">
-                                                <input type="hidden" name="id_perusahaan" value="<?= session('id_perusahaan') ?>">
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                        <label for="nama" class="form-label">Nama Cabang</label>
-                                                        <input type="text" id="nama" name="nama" class="form-control" placeholder="Nama Cabang" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="kode" class="form-label">Kode</label>
-                                                        <input type="text" id="kode" name="kode" class="form-control" placeholder="Kode" />
+                                                        <label for="nama_supplier" class="form-label">Nama Supplier</label>
+                                                        <input type="text" id="nama_supplier" name="nama_supplier" class="form-control" placeholder="Nama Supplier" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -96,23 +89,17 @@ Abude - Data Cabang
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title">Edit cabang</h5>
+                                            <h5 class="modal-title">Edit Supplier</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal">
                                             </button>
                                         </div>
                                         <form id="form-edit" method="post">
                                             <div class="modal-body">
-                                                <input type="hidden" name="id_cabang" id="id_cabang_edit">
+                                                <input type="hidden" name="id_supplier" id="id_supplier_edit">
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                        <label for="nama_edit" class="form-label">Nama cabang</label>
-                                                        <input type="text" id="nama_edit" name="nama" class="form-control" placeholder="Nama cabang" />
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col mb-3">
-                                                        <label for="kode_edit" class="form-label">Kode</label>
-                                                        <input type="text" id="kode_edit" name="kode" class="form-control" placeholder="Kode" />
+                                                        <label for="nama_supplier_edit" class="form-label">Nama Supplier</label>
+                                                        <input type="text" id="nama_supplier_edit" name="nama_supplier" class="form-control" placeholder="Nama Supplier" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -129,11 +116,10 @@ Abude - Data Cabang
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table" id="table_cabang" style="min-width: 845px">
+                            <table class="table" id="table_supplier" style="min-width: 845px">
                                 <thead>
                                     <tr>
-                                        <th>Nama cabang</th>
-                                        <th>Kode</th>
+                                        <th>Nama Supplier</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -163,22 +149,20 @@ Abude - Data Cabang
 
     });
 
-    var table = $('#table_cabang').DataTable({
+    var table = $('#table_supplier').DataTable({
         ajax: {
-            url: '<?= base_url() ?>API/Cabang',
+            url: '<?= base_url() ?>API/Supplier',
             dataSrc: ''
         },
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
         type: "GET",
-        columns: [{
-                data: 'nama'
+        columns: [
+            {
+                data: 'nama_supplier'
             },
             {
-                data: 'kode'
-            },
-            {
-                data: 'id_cabang',
+                data: 'id_supplier',
                 render: function(data, type, row) {
 
                     return '<div class="d-flex">					<button type="button" onclick="editData(' + data + ')" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>		<button type="button" onclick="hapusData(' + data + ')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button> </div>'
@@ -205,7 +189,7 @@ Abude - Data Cabang
         var data_post = convertFormToJSON($('#form-tambah'))
         $.ajax({
             method: "POST",
-            url: "<?= base_url() ?>API/Cabang",
+            url: "<?= base_url() ?>API/Supplier",
             data: data_post,
             dataType: "json"
         }).done(function(response) {
@@ -221,7 +205,7 @@ Abude - Data Cabang
 
     function hapusData(id) {
         $.ajax({
-                url: "<?= base_url(); ?>API/Cabang/" + id,
+                url: "<?= base_url(); ?>API/Supplier/" + id,
                 method: "DELETE",
                 contentType: "application/json"
             })
@@ -239,13 +223,12 @@ Abude - Data Cabang
         $('#modalEdit').modal('toggle');
         $.ajax({
                 method: "GET",
-                url: "<?= base_url(); ?>API/Cabang/" + id,
+                url: "<?= base_url(); ?>API/Supplier/" + id,
                 dataType: "json"
             })
             .done(function(response) {
-                $('#id_cabang_edit').val(response[0].id_cabang)
-                $('#nama_edit').val(response[0].nama)
-                $('#kode_edit').val(response[0].kode)
+                $('#id_supplier_edit').val(response[0].id_supplier)
+                $('#nama_supplier_edit').val(response[0].nama_supplier)
             });
     }
 
@@ -253,7 +236,7 @@ Abude - Data Cabang
         var data_post = convertFormToJSON($('#form-edit'))
         $.ajax({
                 method: "PUT",
-                url: "<?= base_url(); ?>/API/Cabang/" + data_post['id_cabang'],
+                url: "<?= base_url(); ?>/API/Supplier/" + data_post['id_supplier'],
                 contentType: "application/json",
                 data: data_post,
                 dataType: "json"

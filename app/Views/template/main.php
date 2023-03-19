@@ -47,11 +47,12 @@
             Nav header start
         ***********************************-->
         <div class="nav-header">
-            <a href="index.html" class="brand-logo pt-3 mr-auto">
+            <a href="index.html" class="brand-logo">
                 <img src="<?= base_url() ?>assets/images/abude_logo.png" width="75" alt="">
             </a>
+
             <div class="nav-control">
-                <div class="hamburger">
+                <div class="hamburger is-active">
                     <span class="line"></span><span class="line"></span><span class="line"></span>
                 </div>
             </div>
@@ -66,6 +67,25 @@
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
+                <!-- <div class="btn-group show" role="group">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="flaticon-144-layout"></i> Data Master</button>
+                                    <div class="dropdown-menu show" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
+                                    <a class="dropdown-item" href="<?= base_url('Dashboard')?>">Dashboard</a>
+                                    <a class="dropdown-item" href="<?= base_url('Barang')?>">List Barang</a>
+                                    <a class="dropdown-item" href="<?= base_url('Cabang')?>">List Cabang</a>
+                                    <a class="dropdown-item" href="<?= base_url('Perusahaan')?>">List Perusahaan</a>
+                                    <a class="dropdown-item" href="<?= base_url('User') ?>">User</a>
+                                    <a class="dropdown-item" href="<?= base_url('Supplier')?>">Supplier</a>
+                                    <a class="dropdown-item" href="<?= base_url('Perihal')?>">Perihal</a>
+                                    </div>
+                                </div>
+                                <div class="btn-group show" role="group">
+                                    <button type="button-start" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="flaticon-381-network"></i> Laporan Aktivitas</button>
+                                    <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
+                                    <a class="dropdown-item" href="#">Penjualan</a>
+                                    <a class="dropdown-item" href="#">Pembelian</a>
+                                    </div>
+                                </div> -->
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                         </div>
@@ -108,8 +128,9 @@
         <div class="deznav">
             <div class="deznav-scroll">
                 <ul class="metismenu" id="menu">
+                <?php if (session('role') == 'SuperAdmin') : ?>
                     <li class="nav-label first">Main Menu</li>
-                    <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                             <i class="flaticon-144-layout"></i>
                             <span class="nav-text">Data Master</span>
                         </a>
@@ -117,10 +138,24 @@
                             <li><a href="<?= base_url('Dashboard')?>">Dashboard</a></li>
                             <li><a href="<?= base_url('Barang')?>">List Barang</a></li>
                             <li><a href="<?= base_url('Cabang')?>">List Cabang</a></li>
+                            <li><a href="<?= base_url('Perusahaan')?>">List Perusahaan</a></li>
                             <li><a href="<?= base_url('User') ?>">User</a></li>
+                            <li><a href="<?= base_url('Supplier')?>">Supplier</a></li>
+                            <li><a href="<?= base_url('Perihal')?>">Perihal</a></li>
                         </ul>
                     </li>
-                    <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
+                    <li><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                            <i class="flaticon-381-network"></i>
+                            <span class="nav-text"> Laporan Aktivitas</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="<?= base_url() ?>">Penjualan</a></li>
+                            <li><a href="<?= base_url() ?>">Pengeluaran</a></li>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                    <?php if (session('role') == 'Owner') : ?>
+                        <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
                             <i class="flaticon-381-network"></i>
                             <span class="nav-text">Aktivitas</span>
                         </a>
@@ -129,6 +164,7 @@
                             <li><a href="<?= base_url() ?>">Pengeluaran</a></li>
                         </ul>
                     </li>
+                    <?php endif; ?>
             </div>
         </div>
         <!--**********************************
@@ -186,7 +222,6 @@
     <script src="<?= base_url() ?>assets/vendor/owl-carousel/owl.carousel.js"></script>
     <script src="<?= base_url() ?>assets/js/custom.min.js"></script>
     <script src="<?= base_url() ?>assets/js/deznav-init.js"></script>
-    <script src="<?= base_url() ?>assets/js/demo.js"></script>
 </body>
 
 </html>

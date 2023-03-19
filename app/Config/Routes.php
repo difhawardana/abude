@@ -11,7 +11,7 @@ $routes = Services::routes();
  * --------------------------------------------------------------------
  */
 $routes->setDefaultNamespace('App\Controllers');
-$routes->setDefaultController('Home');
+$routes->setDefaultController('Auth');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
@@ -29,8 +29,17 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Auth::index');
+$routes->get('/API/Barang/Dibeli', 'API\Barang::dibeli');
+$routes->get('/API/Barang/Dijual', 'API\Barang::dijual');
 $routes->resource("/API/Barang", ['controller' => 'API\Barang']);
+$routes->resource("/API/Cabang", ['controller' => 'API\Cabang']);
+$routes->resource("/API/User", ['controller' => 'API\User']);
+$routes->resource("/API/Perusahaan", ['controller' => 'API\Perusahaan']);
+$routes->resource("/API/Supplier", ['controller' => 'API\Supplier']);
+$routes->resource("/API/Perihal", ['controller' => 'API\Perihal']);
+
+
 
 
 // $routes->get('barang','Barang::index');

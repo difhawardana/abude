@@ -22,7 +22,7 @@ class User extends BaseController
 	{
 		$data = [
 			'username' => $this->request->getVar('username'),
-			'password' => $this->request->getVar('password'),
+			'password' => md5($this->request->getVar('password')),
 			'role' => $this->request->getVar('role'),
 		];
 

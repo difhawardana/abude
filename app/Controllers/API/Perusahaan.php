@@ -2,11 +2,11 @@
 
 namespace App\Controllers\API;
 
-use App\Models\BarangModel;
+use App\Models\PerusahaanModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class Barang extends ResourceController
+class Perusahaan extends ResourceController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -15,7 +15,7 @@ class Barang extends ResourceController
      */
     public function index()
     {
-        $model = new BarangModel();
+        $model = new PerusahaanModel();
         $data = $model->findAll();
         return $this->respond($data, 200);
     }
@@ -27,34 +27,12 @@ class Barang extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new BarangModel();
-        $data = $model->getWhere(['id_barang'  => $id])->getResult();
+        $model = new PerusahaanModel();
+        $data = $model->getWhere(['id_perusahaan' => $id])->getResult();
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Barang dengan id tersebut tidak ditemukan');
-        }
-    }
-
-    public function dibeli()
-    {
-        $model = new BarangModel();
-        $data = $model->getWhere(['status'  => 'Dibeli'])->getResult();
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Barang dengan status tersebut tidak ditemukan');
-        }
-    }
-
-    public function dijual()
-    {
-        $model = new BarangModel();
-        $data = $model->getWhere(['status'  => 'Dijual'])->getResult();
-        if ($data) {
-            return $this->respond($data);
-        } else {
-            return $this->failNotFound('Barang dengan status tersebut tidak ditemukan');
+            return $this->failNotFound('Perusahaan dengan id tersebut tidak ditemukan');
         }
     }
 
@@ -74,26 +52,18 @@ class Barang extends ResourceController
      */
     public function create()
     {
-        $model = new BarangModel();
+        $model = new PerusahaanModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
-                'nama_barang' => $json->nama_barang,
-                'harga_barang' => $json->harga_barang,
-                'satuan' => $json->satuan,
-                'status' => $json->status,
-                'id_cabang' => $json->id_cabang,
-                'id_supplier' => $json->id_supplier
+                'nama' => $json->nama,
+                'kode' => $json->kode,
             ];
         } else {
-            $input = $this->request->getRawInput(); 
+            $input = $this->request->getRawInput();
             $data = [
-                'nama_barang' => $input['nama_barang'],
-                'harga_barang' => $input['harga_barang'],
-                'satuan' => $input['satuan'],
-                'status' => $input['status'],
-                'id_cabang' => $input['id_cabang'],
-                'id_supplier' => $input['id_supplier']
+                'nama' => $input['nama'],
+                'kode' => $input['kode'],
             ];
         }
         $model->insert($data);
@@ -101,7 +71,7 @@ class Barang extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Barang berhasil ditambah.'
+                'success' => 'Perusahaan berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);
@@ -124,22 +94,18 @@ class Barang extends ResourceController
      */
     public function update($id = null)
     {
-        $model = new BarangModel();
+        $model = new PerusahaanModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
-                'nama_barang' => $json->nama_barang,
-                'harga_barang' => $json->harga_barang,
-                'satuan' => $json->satuan,
-                'status' => $json->status,
+                'nama' => $json->nama,
+                'kode' => $json->kode
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'nama_barang' => $input['nama_barang'],
-                'harga_barang' => $input['harga_barang'],
-                'satuan' => $input['satuan'],
-                'status' => $input['status']
+                'nama' => $input['nama'],
+                'kode' => $input['kode'],
             ];
         }
         $model->update($id, $data);
@@ -147,7 +113,7 @@ class Barang extends ResourceController
             'status' => 200,
             'error' => null,
             'messages' => [
-                'success' => 'Berhasil mengupdate barang!'
+                'success' => 'Berhasil mengupdate Perusahaan!'
             ],
         ];
         return $this->respond($response);
@@ -160,7 +126,7 @@ class Barang extends ResourceController
      */
     public function delete($id = null)
     {
-        $model = new BarangModel();
+        $model = new PerusahaanModel();
         $data = $model->find($id);
         if ($data) {
             $model->delete($id);
@@ -168,13 +134,13 @@ class Barang extends ResourceController
                 'status' => 200,
                 'error' => null,
                 'messages' => [
-                    'success' => 'Barang berhasil dihapus'
+                    'success' => 'Perusahaan berhasil dihapus'
                 ]
             ];
 
             return $this->respondDeleted($response);
         } else {
-            return $this->failNotFound('Barang dengan id tersebut tidak ditemukan!');
+            return $this->failNotFound('Perusahaan dengan id tersebut tidak ditemukan!');
         }
     }
 }
