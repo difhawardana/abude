@@ -14,9 +14,9 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/images/abude_logo.png">
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/chartist/css/chartist.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <link href="<?= base_url() ?>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
-    <link href="<?= base_url() ?>assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css">
     <?= $this->renderSection('css') ?>
 
@@ -209,19 +209,16 @@
     <script src="<?= base_url() ?>assets/vendor/global/global.min.js"></script>
     <script src="<?= base_url() ?>assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>assets/vendor/chart.js/Chart.bundle.min.js"></script>
-    <?= $this->renderSection('script') ?>
 
     <!-- Chart piety plugin files -->
     <script src="<?= base_url() ?>assets/vendor/peity/jquery.peity.min.js"></script>
-
-    <!-- Apex Chart -->
-    <script src="<?= base_url() ?>assets/vendor/apexchart/apexchart.js"></script>
 
     <!-- Dashboard 1 -->
     <script src="<?= base_url() ?>assets/js/dashboard/dashboard-1.js"></script>
     <script src="<?= base_url() ?>assets/vendor/owl-carousel/owl.carousel.js"></script>
     <script src="<?= base_url() ?>assets/js/custom.min.js"></script>
     <script src="<?= base_url() ?>assets/js/deznav-init.js"></script>
+    <?= $this->renderSection('script') ?>
 </body>
 
 </html>

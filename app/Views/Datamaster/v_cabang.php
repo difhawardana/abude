@@ -9,6 +9,8 @@ Abude - Data Cabang
 <?= $this->section('css') ?>
 <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/datatables.min.css">
 <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/DataTables-1.13.1/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="<?= base_url() ?>assets/vendor/sweetalert2/dist/sweetalert2.min.css" >
+<link rel="stylesheet" href="<?= base_url() ?>assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css">
 <?= $this->endSection() ?>
 <!-- Section Content -->
 <?= $this->section('content') ?>
@@ -153,6 +155,8 @@ Abude - Data Cabang
 
 <!-- Section Javascript -->
 <?= $this->section('script') ?>
+<script src="<?= base_url() ?>assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+<script src="<?= base_url() ?>assets/js/plugins-init/sweetalert.init.js"></script>
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
@@ -181,7 +185,7 @@ Abude - Data Cabang
                 data: 'id_cabang',
                 render: function(data, type, row) {
 
-                    return '<div class="d-flex">					<button type="button" onclick="editData(' + data + ')" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>		<button type="button" onclick="hapusData(' + data + ')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button> </div>'
+                    return '<div class="d-flex">					<button type="button" onclick="editData(' + data + ')" class="btn btn-primary btn sweet-wrong shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></button>		<button type="button" onclick="hapusData(' + data + ')" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></button> </div>'
                 }
             },
         ],

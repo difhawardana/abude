@@ -15,7 +15,6 @@ Abude - Data Barang
 <div class="content-body">
     <div class="container-fluid">
         <?= \Config\Services::validation()->listErrors(); ?>
-        <!-- Add Project -->
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
@@ -291,6 +290,10 @@ Abude - Data Barang
 <?= $this->section('script') ?>
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="<?= base_url() ?>assets/js/dashboard/dashboard-1.js"></script>
+<script src="<?= base_url() ?>assets/vendor/owl-carousel/owl.carousel.js"></script>
+<script src="<?= base_url() ?>assets/js/deznav-init.js"></script>
+<script src="<?= base_url() ?>assets/js/demo.js"></script>
 <script>
     $(document).ready(function() {
         $('#alert-sukses').hide();

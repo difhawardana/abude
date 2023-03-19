@@ -5,8 +5,6 @@
 Abude - Dashboard
 <?= $this->endSection() ?>
 
-
-
 <!-- Section Content -->
 <?= $this->section('content') ?>
 	<div class="content-body">
@@ -19,10 +17,9 @@ Abude - Dashboard
 		<?= $this->endSection() ?>
 
 		<!-- Section Dashboard 1 -->
-	<!-- <?= $this->section('js') ?>
+	<?= $this->section('script') ?>
 	<script src="<?= base_url() ?>/assets/js/dashboard/dashboard-1.js"></script>
 	<script src="<?= base_url() ?>/assets/vendor/owl-carousel/owl.carousel.js"></script>
-    <script src="<?= base_url() ?>/assets/js/custom.min.js"></script>
 	<script src="<?= base_url() ?>/assets/js/deznav-init.js"></script>
     <script src="<?= base_url() ?>/assets/js/demo.js"></script>
-	<?= $this->endSection() ?> -->
+	<?= $this->endSection() ?>

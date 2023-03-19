@@ -8,6 +8,8 @@ use CodeIgniter\Filters\DebugToolbar;
 use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
+use App\Filters\DashboardFilter;
+use App\Filters\LoginFilter;
 
 class Filters extends BaseConfig
 {
@@ -21,6 +23,8 @@ class Filters extends BaseConfig
         'honeypot'      => Honeypot::class,
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
+        'DashboardFilter' => DashboardFilter::class,
+        'LoginFilter' => LoginFilter::class
     ];
 
     /**
@@ -60,5 +64,28 @@ class Filters extends BaseConfig
      * Example:
      * 'isLoggedIn' => ['before' => ['account/*', 'profiles/*']]
      */
-    public array $filters = [];
+    public array $filters = [
+        'DashboardFilter' => [
+            'before' => [
+                'dashboard',
+                'dashboard/*',
+                'barang',
+                'barang/*',
+                'cabang',
+                'cabang/*',
+                'user',
+                'user/*',
+                'supplier',
+                'supplier/*',
+                'perihal',
+                'perihal/*',
+            ]
+        ],
+        'LoginFilter' => [
+            'before' => [
+                'login',
+                '/',
+            ]
+        ]
+    ];
 }
