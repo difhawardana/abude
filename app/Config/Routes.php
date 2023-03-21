@@ -38,6 +38,18 @@ $routes->resource("/API/User", ['controller' => 'API\User']);
 $routes->resource("/API/Perusahaan", ['controller' => 'API\Perusahaan']);
 $routes->resource("/API/Supplier", ['controller' => 'API\Supplier']);
 $routes->resource("/API/Perihal", ['controller' => 'API\Perihal']);
+// $routes->post('/', 'Auth::index');
+
+
+$routes->group('api', ["filter" => "cors", "auth"],  function($routes) {
+	$routes->get('users', 'API\User::index');
+	$routes->post('users', 'API\User::create');
+	$routes->get('users/(:num)', 'API\User::show/$1');
+	$routes->patch('users/(:num)', 'API\User::update/$1');
+	$routes->delete('users/(:num)', 'API\User::delete/$1');
+});
+
+$routes->post('API/users/token', 'API\Auth::loginUser', ['filter' => 'cors']);
 
 
 

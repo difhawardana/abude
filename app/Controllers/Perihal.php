@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
 use CodeIgniter\Controller;
 use App\Models\PerihalModel;
 

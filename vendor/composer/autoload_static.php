@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf15b697065118b91483bd748e77f2887
+class ComposerStaticInit14e6e2697b71e7bf462daa58651bade3
 {
     public static $files = array (
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
@@ -29,6 +29,7 @@ class ComposerStaticInitf15b697065118b91483bd748e77f2887
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'Faker\\' => 6,
         ),
         'D' => 
@@ -62,6 +63,10 @@ class ComposerStaticInitf15b697065118b91483bd748e77f2887
         'Laminas\\Escaper\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Faker\\' => 
         array (
@@ -983,6 +988,13 @@ class ComposerStaticInitf15b697065118b91483bd748e77f2887
         'Faker\\Provider\\zh_TW\\Text' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/Provider/zh_TW/Text.php',
         'Faker\\UniqueGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/UniqueGenerator.php',
         'Faker\\ValidGenerator' => __DIR__ . '/..' . '/fakerphp/faker/src/Faker/ValidGenerator.php',
+        'Firebase\\JWT\\BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/BeforeValidException.php',
+        'Firebase\\JWT\\CachedKeySet' => __DIR__ . '/..' . '/firebase/php-jwt/src/CachedKeySet.php',
+        'Firebase\\JWT\\ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/src/ExpiredException.php',
+        'Firebase\\JWT\\JWK' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWK.php',
+        'Firebase\\JWT\\JWT' => __DIR__ . '/..' . '/firebase/php-jwt/src/JWT.php',
+        'Firebase\\JWT\\Key' => __DIR__ . '/..' . '/firebase/php-jwt/src/Key.php',
+        'Firebase\\JWT\\SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/src/SignatureInvalidException.php',
         'Laminas\\Escaper\\Escaper' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Escaper.php',
         'Laminas\\Escaper\\Exception\\ExceptionInterface' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/ExceptionInterface.php',
         'Laminas\\Escaper\\Exception\\InvalidArgumentException' => __DIR__ . '/..' . '/laminas/laminas-escaper/src/Exception/InvalidArgumentException.php',
@@ -1906,10 +1918,10 @@ class ComposerStaticInitf15b697065118b91483bd748e77f2887
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf15b697065118b91483bd748e77f2887::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf15b697065118b91483bd748e77f2887::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitf15b697065118b91483bd748e77f2887::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitf15b697065118b91483bd748e77f2887::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit14e6e2697b71e7bf462daa58651bade3::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit14e6e2697b71e7bf462daa58651bade3::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit14e6e2697b71e7bf462daa58651bade3::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit14e6e2697b71e7bf462daa58651bade3::$classMap;
 
         }, null, ClassLoader::class);
     }

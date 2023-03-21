@@ -5,9 +5,8 @@ namespace App\Filters;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use App\Libraries\JWTCI4;
 
-class LoginFilter implements FilterInterface
+class CorsFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -26,28 +25,20 @@ class LoginFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        // if (session('role')) {
-        //     return redirect()->to('Dashboard');
-        // }
-        if( !$request->getHeader('Authorization') )
-		{
+        header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+		header("Access-Control-Allow-Credentials: true");
+		header("Access-Control-Max-Age: 86400");
+        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+        
+		
+		if ( $request->getMethod() == 'options')
+        {
 			$response = service('response');
-            $response->setJSON(['success' => false, 'message' => 'Unauthorized. Token is required!']);
-            $response->setStatusCode(401);
+            $response->setJSON(['method' => 'OPTIONS']);
             return $response;
-		}
-
-		//validasi JWT
-		$token = $request->getHeader('Authorization');
-		$jwt = new JWTCI4;
-		$verifiy = $jwt->parse($token);
-		if( !$verifiy['success'] )
-		{
-			$response = service('response');
-            $response->setJSON($verifiy);
-            $response->setStatusCode(401);
-            return $response;
-		}
+			die();
+        }
     }
 
     /**

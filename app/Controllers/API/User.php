@@ -6,13 +6,11 @@ use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class User extends ResourceController
+class User extends BaseController
 {
-    /**
-     * Return an array of resource objects, themselves in array format
-     *
-     * @return mixed
-     */
+
+    use ResponseTrait;
+
     public function index()
     {
         $model = new UserModel();
@@ -25,12 +23,12 @@ class User extends ResourceController
      *
      * @return mixed
      */
-    public function show($id = null)
+    public function show($id)
     {
         $model = new UserModel();
-        $data = $model->getWhere(['id_user' => $id])->getResult();
-        if ($data) {
-            return $this->respond($data);
+        $user = $model->where('id', $id)->first();
+        if ($user) {
+            return $this->respond($user);
         } else {
             return $this->failNotFound('User dengan id tersebut tidak ditemukan');
         }
@@ -45,13 +43,33 @@ class User extends ResourceController
     {
     }
 
-    /**
-     * Create a new resource object, from "posted" parameters
-     *
-     * @return mixed
-     */
     public function create()
     {
+
+        if( !$this->validate([
+			'username' 	    => 'required|is_unique[m_users.username]',
+			'password' 	    => 'required',
+			'role'	   	    => 'required',
+			'id_cabang'	    => 'required',
+			'id_perusahaan'	=> 'required'
+		]))
+		{
+			return $this->response->setJSON(['success' => false, 'data' => null, "message" => \Config\Services::validation()->getErrors()]);
+		}
+
+        $insert = [
+            'username' => $this->request->getVar('username'),
+            'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT),
+			'role' => $this->request->getVar('role'),
+			'id_cabang' => $this->request->getVar('id_cabang'),
+			'id_perusahaan' => $this->request->getVar('id_perusahaan'),
+        ];
+
+        $model = new UserModel();
+		$save  = $model->insert($insert);
+		
+		return $this->setResponseFormat('json')->respondCreated( ['sucess'=> true, 'mesage' => 'OK'] );
+
         $model = new UserModel();
         $json = $this->request->getJSON();
         if ($json) {
@@ -83,59 +101,45 @@ class User extends ResourceController
         return $this->respondCreated($response, 201);
     }
 
-    /**
-     * Return the editable properties of a resource object
-     *
-     * @return mixed
-     */
     public function edit($id = null)
     {
         //
     }
 
-    /**
-     * Add or update a model resource, from "posted" properties
-     *
-     * @return mixed
-     */
-    public function update($id = null)
-    {
-        $model = new UserModel();
-        $json = $this->request->getJSON();
-        if ($json) {
-            $data = [
-                'username' => $json->username,
-                'password' => $json->password,
-                'role' => $json->role,
-                'id_perusahaan' => $json->id_perusahaan,
-                'id_cabang' => $json->id_cabang
-            ];
-        } else {
-            $input = $this->request->getRawInput();
-            $data = [
-                'username' => $input['username'],
-                'password' => $input['password'],
-                'role' => $input['role'],
-                'id_perusahaan' => $input['id_perusahaan'],
-                'id_cabang' => $input['id_cabang']
-            ];
+    public function update($id)
+	{
+		if (! $this->validate([
+            'username' => 'permit_empty|is_unique[m_users.username,id,'.$id.']',
+            'password' => 'permit_empty',
+			'role' => 'permit_empty',
+			// 'id_cabang' => 'permit_empty',
+			// 'id_perusahaan' => 'permit_empty',
+        ])) {
+            return $this->response->setJSON(['success' => false, "message" => \Config\Services::validation()->getErrors()]);
         }
-        $model->update($id, $data);
-        $response = [
-            'status' => 200,
-            'error' => null,
-            'messages' => [
-                'success' => 'Berhasil mengupdate User!'
-            ],
-        ];
-        return $this->respond($response);
-    }
 
-    /**
-     * Delete the designated resource object from the model
-     *
-     * @return mixed
-     */
+        $model = new UserModel();
+		$exist = $model->where('id', $id)->first();
+
+		if( !$exist )
+		{
+			return $this->response->setJSON(['success' => false, "message" => 'User tidak ditemukan']);
+		}
+		
+        $update = [
+            'username' => $this->request->getVar('username') ? $this->request->getVar('username') : $exist['username'],
+            'password' => $this->request->getVar('password') ? password_hash($this->request->getVar('password'), PASSWORD_DEFAULT) : $exist['password'],
+			'role' => $this->request->getVar('role') ? $this->request->getVar('role') : $exist['role'],
+			// 'id_cabang' => $this->request->getVar('id_cabang')  ? $this->request->getVar('id_cabang') : $exist['id_cabang'],
+			// 'id_perusahaan' => $this->request->getVar('id_perusahaan') ? $this->request->getVar('id_perusahaan') : $exist['id_perusahaan']
+        ];
+
+        $model = new UserModel;
+        $save  = $model->update( $id, $update);
+
+        return $this->response->setJSON(['success' => true,'message' => 'OK']);
+	}
+
     public function delete($id = null)
     {
         $model = new UserModel();
