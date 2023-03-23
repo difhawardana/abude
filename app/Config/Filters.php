@@ -9,7 +9,8 @@ use CodeIgniter\Filters\Honeypot;
 use CodeIgniter\Filters\InvalidChars;
 use CodeIgniter\Filters\SecureHeaders;
 use App\Filters\DashboardFilter;
-use App\Filters\LoginFilter;
+use App\Filters\AuthFilter;
+use App\Filters\CorsFilter;
 
 class Filters extends BaseConfig
 {
@@ -24,10 +25,8 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
         'DashboardFilter' => DashboardFilter::class,
-        'LoginFilter' => LoginFilter::class,
-
-        'cors' 	   => \App\Filters\CorsFilter::class, //register cors
-        'auth' 	   => \App\Filters\AuthFilter::class //register auth
+        'AuthFilter' => AuthFilter::class,
+        'CorsFilter' => CorsFilter::class,
     ];
 
     /**
@@ -82,12 +81,6 @@ class Filters extends BaseConfig
                 'supplier/*',
                 'perihal',
                 'perihal/*',
-            ]
-        ],
-        'LoginFilter' => [
-            'before' => [
-                'login',
-                '/',
             ]
         ]
     ];

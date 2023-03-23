@@ -35,8 +35,9 @@ $validation = \Config\Services::validation();
 									</div>
                                     <h4 class="text-center mb-4">Silahkan Melakukan Login</h4>
 
-                                    <form class="form-valide" method="POST" action="<?= base_url('Auth/loginUser') ?>">
-                                        <div class="form-group">
+                                    <form id="form-tambah" class="form-valide" method="POST" action="<?= base_url('Auth/loginUser') ?>">
+                                    <input type="hidden" name="isWeb" value="true">
+                                    <div class="form-group">
                                             <label for="username" class="mb-1"><strong>Username</strong>
                                             <span class="text-danger">*</span></label>
                                             <input value="<?= old('username') ?>" type="text" class="form-control" name="username" tabindex="1"
@@ -60,7 +61,7 @@ $validation = \Config\Services::validation();
                                             </div>
                                         </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+                                            <button onclick="login()" type="button" class="btn btn-primary btn-block">Masuk</button>
                                         </div>
                                         <?php if (session()->getFlashData('error')) : ?>
                                                 <?= session()->getFlashData('error') ?>
@@ -85,5 +86,26 @@ $validation = \Config\Services::validation();
     <script src="<?= base_url() ?>/assets/js/custom.min.js"></script>
 	<script src="<?= base_url() ?>/assets/js/deznav-init.js"></script>
     <script src="<?= base_url() ?>/assets/js/demo.js"></script>
+
+    <script>
+        function login() {
+        var data_post = convertFormToJSON($('#form-tambah'))
+        $.ajax({
+            method: "POST",
+            url: "<?= base_url() ?>API/Login",
+            data: data_post,
+            dataType: "json"
+        }).done(function(response) {
+            if (response.status) {
+                $('#alert-sukses').show(
+                    
+                );
+            } else {
+                $('#alert-gagal').show();
+            }
+            table.ajax.reload();
+        })
+    }
+    </script>
 </body>
 </html>

@@ -5,8 +5,10 @@ namespace App\Filters;
 use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
-class CorsFilter implements FilterInterface
+class AuthFilter implements FilterInterface
 {
     /**
      * Do whatever processing this filter needs to do.
@@ -25,18 +27,33 @@ class CorsFilter implements FilterInterface
      */
     public function before(RequestInterface $request, $arguments = null)
     {
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        header("Access-Control-Allow-Credentials: true");
-        header("Access-Control-Max-Age: 86400");
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
+        $key = getenv('JWT_SECRET');
+        $header = $request->getHeader("Authorization");
+        $token = null;
 
+        // extract the token from the header
+        if (!empty($header)) {
+            if (preg_match('/Bearer\s(\S+)/', $header, $matches)) {
+                $token = $matches[1];
+            }
+        }
 
-        if ($request->getMethod() == 'options') {
+        // check if token is null or empty
+        if (is_null($token) || empty($token)) {
             $response = service('response');
-            $response->setJSON(['method' => 'OPTIONS']);
+            $response->setBody('Access denied');
+            $response->setStatusCode(401);
             return $response;
-            die();
+        }
+
+        try {
+            // $decoded = JWT::decode($token, $key, array("HS256"));
+            $decoded = JWT::decode($token, new Key($key, 'HS256'));
+        } catch (Exception $ex) {
+            $response = service('response');
+            $response->setBody('Access denied');
+            $response->setStatusCode(401);
+            return $response;
         }
     }
 

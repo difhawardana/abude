@@ -30,32 +30,18 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
-$routes->get('/API/Barang/Dibeli', 'API\Barang::dibeli');
-$routes->get('/API/Barang/Dijual', 'API\Barang::dijual');
-$routes->resource("/API/Barang", ['controller' => 'API\Barang']);
-$routes->resource("/API/Cabang", ['controller' => 'API\Cabang']);
-$routes->resource("/API/User", ['controller' => 'API\User']);
-$routes->resource("/API/Perusahaan", ['controller' => 'API\Perusahaan']);
-$routes->resource("/API/Supplier", ['controller' => 'API\Supplier']);
-$routes->resource("/API/Perihal", ['controller' => 'API\Perihal']);
-// $routes->post('/', 'Auth::index');
+$routes->post('/API/Login', 'API\Auth::login', ['filter' => 'CorsFilter']);
 
-
-$routes->group('api', ["filter" => "cors", "auth"],  function($routes) {
-	$routes->get('users', 'API\User::index');
-	$routes->post('users', 'API\User::create');
-	$routes->get('users/(:num)', 'API\User::show/$1');
-	$routes->patch('users/(:num)', 'API\User::update/$1');
-	$routes->delete('users/(:num)', 'API\User::delete/$1');
+$routes->group('API', ["filter" => "AuthFilter"], function ($routes) {
+	$routes->get('Barang/Dibeli', 'API\Barang::dibeli');
+	$routes->get('Barang/Dijual', 'API\Barang::dijual');
+	$routes->resource("Barang", ['controller' => 'API\Barang']);
+	$routes->resource("Cabang", ['controller' => 'API\Cabang']);
+	$routes->resource("User", ['controller' => 'API\User']);
+	$routes->resource("Perusahaan", ['controller' => 'API\Perusahaan']);
+	$routes->resource("Supplier", ['controller' => 'API\Supplier']);
+	$routes->resource("Perihal", ['controller' => 'API\Perihal']);
 });
-
-$routes->post('API/users/token', 'API\Auth::loginUser', ['filter' => 'cors']);
-
-
-
-
-// $routes->get('barang','Barang::index');
-
 /*
  * --------------------------------------------------------------------
  * Additional Routing
@@ -70,5 +56,5 @@ $routes->post('API/users/token', 'API\Auth::loginUser', ['filter' => 'cors']);
  * needing to reload it.
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
-    require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
 }
