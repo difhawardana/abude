@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use CodeIgniter\Controller;
 use App\Models\BarangModel;
+use App\Models\SupplierModel;
 
 class Barang extends BaseController
 {
@@ -17,7 +18,11 @@ class Barang extends BaseController
 
 	public function index()
 	{
-		return view("Datamaster/v_barang");
+		$supplier = new SupplierModel();
+		$data = [
+			'supplier' => $supplier->select('id_supplier, nama_supplier',)->findAll()
+		];
+		return view("Datamaster/v_barang", $data);
 	}
 
 	public function store()

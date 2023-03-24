@@ -84,12 +84,12 @@ Abude - Data User
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                    <label for="role" class="form-label">Role</label>
-                                                    <select id="role" name="role" class="form-control default-select form-control-lg" tabindex="-98">
-                                                        <option value="SuperAdmin">SuperAdmin</option>
-                                                        <option value="Owner">Owner</option>
-                                                        <option value="Admin Cabang">Admin Cabang</option>
-                                                    </select>
+                                                        <label for="role" class="form-label">Role</label>
+                                                        <select id="role" name="role" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <option value="SuperAdmin">SuperAdmin</option>
+                                                            <option value="Owner">Owner</option>
+                                                            <option value="Admin Cabang">Admin Cabang</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,11 +128,11 @@ Abude - Data User
                                                 </div>
                                                 <div class="row">
                                                     <div class="col mb-3">
-                                                    <label for="role" class="form-label">Role</label>
-                                                    <select id="role" name="role" class="form-control default-select form-control-lg" tabindex="-98">
-                                                        <option value="SuperAdmin">SuperAdmin</option>
-                                                        <option value="Admin">Admin</option>
-                                                    </select>
+                                                        <label for="role" class="form-label">Role</label>
+                                                        <select id="role" name="role" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <option value="SuperAdmin">SuperAdmin</option>
+                                                            <option value="Admin">Admin</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
@@ -185,7 +185,10 @@ Abude - Data User
     var table = $('#table_user').DataTable({
         ajax: {
             url: '<?= base_url() ?>API/User',
-            dataSrc: ''
+            dataSrc: '',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
         },
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -226,13 +229,16 @@ Abude - Data User
     function tambahData() {
         var data_post = convertFormToJSON($('#form-tambah'))
         console.log(data_post)
+        console.log(JSON.stringify(data_post));
         $.ajax({
             method: "POST",
             url: "<?= base_url() ?>API/User",
-            data: data_post,
-            dataType: "json"
+            data: JSON.stringify(data_post),
+            dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            },
         }).done(function(response) {
-            console.log(response)
             $('#modalTambah').modal('toggle');
             if (response.status) {
                 $('#alert-sukses').show();

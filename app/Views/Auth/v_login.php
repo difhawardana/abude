@@ -9,14 +9,14 @@ $validation = \Config\Services::validation();
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="">
-	<meta name="author" content="">
-	<meta name="robots" content="">
+    <meta name="author" content="">
+    <meta name="robots" content="">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-	<meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="telephone=no">
     <title>Abude - Login</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>/assets/images/favicon.png">
-	<link href="<?= base_url() ?>/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="<?= base_url() ?>/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>/assets/css/style.css" rel="stylesheet">
 
 </head>
@@ -30,18 +30,16 @@ $validation = \Config\Services::validation();
                         <div class="row no-gutters">
                             <div class="col-xl-12">
                                 <div class="auth-form">
-									<div class="text-center mb-3 mr-3">
-										<img src="<?= base_url() ?>/assets/images/abude_logo.png" alt="">
-									</div>
+                                    <div class="text-center mb-3 mr-3">
+                                        <img src="<?= base_url() ?>/assets/images/abude_logo.png" alt="">
+                                    </div>
                                     <h4 class="text-center mb-4">Silahkan Melakukan Login</h4>
 
-                                    <form id="form-tambah" class="form-valide" method="POST" action="<?= base_url('Auth/loginUser') ?>">
-                                    <input type="hidden" name="isWeb" value="true">
-                                    <div class="form-group">
+                                    <form id="form-login" class="form-valide" method="POST" action="<?= base_url('Auth/loginUser') ?>">
+                                        <div class="form-group">
                                             <label for="username" class="mb-1"><strong>Username</strong>
-                                            <span class="text-danger">*</span></label>
-                                            <input value="<?= old('username') ?>" type="text" class="form-control" name="username" tabindex="1"
-                                                placeholder="username">
+                                                <span class="text-danger">*</span></label>
+                                            <input value="<?= old('username') ?>" type="text" class="form-control" id="username" name="username" tabindex="1" placeholder="username">
                                             <div class="invalid-feedback" style="display: block">
                                                 <?= $validation->getError('username') ?>
                                             </div>
@@ -49,9 +47,8 @@ $validation = \Config\Services::validation();
 
                                         <div class="form-group">
                                             <label for="password" class="mb-1"><strong>Password</strong>
-                                            <span class="text-danger">*</span></label>
-                                            <input value="<?= old('password') ?>" id="password" type="password" class="form-control" name="password" tabindex="2"
-                                            placeholder="password">
+                                                <span class="text-danger">*</span></label>
+                                            <input value="<?= old('password') ?>" id="password" type="password" class="form-control" name="password" tabindex="2" placeholder="password">
                                             <div class="invalid-feedback" style="display: block">
                                                 <?= $validation->getError('password') ?>
                                             </div>
@@ -64,8 +61,8 @@ $validation = \Config\Services::validation();
                                             <button onclick="login()" type="button" class="btn btn-primary btn-block">Masuk</button>
                                         </div>
                                         <?php if (session()->getFlashData('error')) : ?>
-                                                <?= session()->getFlashData('error') ?>
-                                            <?php endif; ?>
+                                            <?= session()->getFlashData('error') ?>
+                                        <?php endif; ?>
                                     </form>
                                 </div>
                             </div>
@@ -82,30 +79,38 @@ $validation = \Config\Services::validation();
     <!-- Required vendors -->
     <!-- <script src="<?= base_url() ?>/vendor/jquery-validation/jquery.validate.min.js"></script> -->
     <script src="<?= base_url() ?>/assets/vendor/global/global.min.js"></script>
-	<script src="<?= base_url() ?>/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="<?= base_url() ?>/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
     <script src="<?= base_url() ?>/assets/js/custom.min.js"></script>
-	<script src="<?= base_url() ?>/assets/js/deznav-init.js"></script>
+    <script src="<?= base_url() ?>/assets/js/deznav-init.js"></script>
     <script src="<?= base_url() ?>/assets/js/demo.js"></script>
 
     <script>
+        function convertFormToJSON(form) {
+            return $(form).serializeArray().reduce(function(json, {
+                name,
+                value
+            }) {
+                json[name] = value;
+                return json;
+            }, {})
+        }
+
         function login() {
-        var data_post = convertFormToJSON($('#form-tambah'))
-        $.ajax({
-            method: "POST",
-            url: "<?= base_url() ?>API/Login",
-            data: data_post,
-            dataType: "json"
-        }).done(function(response) {
-            if (response.status) {
-                $('#alert-sukses').show(
-                    
-                );
-            } else {
-                $('#alert-gagal').show();
+            var data_post = {
+                'username': document.getElementById('username').value,
+                'password': document.getElementById('password').value
             }
-            table.ajax.reload();
-        })
-    }
+            $.ajax({
+                method: "POST",
+                url: "<?= base_url() ?>API/Login",
+                data: JSON.stringify(data_post),
+                dataType: "json",
+                success: function(response) {
+                    window.location.href = "<?php echo base_url() ?>dashboard";
+                }
+            });
+        }
     </script>
 </body>
+
 </html>
