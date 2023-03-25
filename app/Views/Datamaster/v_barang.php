@@ -330,8 +330,6 @@ Abude - Data Barang
 </div>
 <?= $this->endSection() ?>
 
-
-
 <!-- Section Javascript -->
 <?= $this->section('script') ?>
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
@@ -346,7 +344,6 @@ Abude - Data Barang
         $('#alert-gagal-edit').hide();
     });
 
-  
     var table1 = $('#table_barang_dijual').DataTable({
         ajax: {
             url: '<?= base_url() ?>API/Barang/Dijual',

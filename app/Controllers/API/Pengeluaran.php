@@ -2,11 +2,11 @@
 
 namespace App\Controllers\API;
 
-use App\Models\TransaksiDetailModel;
+use App\Models\PengeluaranModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class TransaksiDetail extends ResourceController
+class Pengeluaran extends ResourceController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -15,12 +15,12 @@ class TransaksiDetail extends ResourceController
      */
     public function index()
     {
-        $model = new TransaksiDetailModel();
+        $model = new PengeluaranModel();
         $data = $model->findAll();
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Transaksi detail dengan id tersebut tidak ditemukan');
+            return $this->failNotFound('Pengeluaran dengan id tersebut tidak ditemukan');
         }
     }
 
@@ -31,8 +31,8 @@ class TransaksiDetail extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new TransaksiDetailModel();
-        $data = $model->getWhere(['id_transaksi_detail'  => $id])->getResult();
+        $model = new PengeluaranModel();
+        $data = $model->getWhere(['id_pengeluaran'  => $id])->getResult();
         return $this->respond($data);
     }
 
@@ -52,20 +52,26 @@ class TransaksiDetail extends ResourceController
      */
     public function create()
     {
-        $model = new TransaksiDetailModel();
+        $model = new PengeluaranModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
-                'jumlah' => $json->jumlah,
-                'harga' => $json->harga,
-                'subtotal' => $json->subtotal,
+                'kode_pengeluaran' => $json->kode_pengeluaran,
+                'tanggal' => $json->tanggal,
+                'waktu' => $json->jam,
+                'total_harga' => $json->total_harga,
+                'total_jumlah' => $json->total_jumlah,
+                'id_cabang' => $json->id_cabang
             ];
         } else {
             $input = $this->request->getRawInput();
             $data = [
-                'jumlah' => $input['jumlah'],
-                'harga' => $input['harga'],
-                'subtotal' => $input['subtotal'],
+                'kode_pengeluaran' => $input['kode_pengeluaran'],
+                'tanggal' => $input['tanggal'],
+                'jam' => $input['jam'],
+                'total_harga' => $input['total_harga'],
+                'total_jumlah' => $input['total_jumlah'],
+                'id_cabang' => $input['id_cabang']
             ];
         }
         $model->insert($data);
@@ -73,7 +79,7 @@ class TransaksiDetail extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Transaksi berhasil ditambah.'
+                'success' => 'Pengeluaran berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);

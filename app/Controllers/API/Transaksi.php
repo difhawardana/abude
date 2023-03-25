@@ -6,7 +6,7 @@ use App\Models\TransaksiModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class Barang extends ResourceController
+class Transaksi extends ResourceController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -52,7 +52,7 @@ class Barang extends ResourceController
      */
     public function create()
     {
-        $model = new BarangModel();
+        $model = new TransaksiModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
@@ -79,7 +79,7 @@ class Barang extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Barang berhasil ditambah.'
+                'success' => 'Transaksi berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);

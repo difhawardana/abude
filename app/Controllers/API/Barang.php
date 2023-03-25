@@ -132,6 +132,7 @@ class Barang extends ResourceController
                 'harga_barang' => $json->harga_barang,
                 'satuan' => $json->satuan,
                 'status' => $json->status,
+                // 'supplier' => $json->nama_supplier,
             ];
         } else {
             $input = $this->request->getRawInput();
@@ -139,7 +140,8 @@ class Barang extends ResourceController
                 'nama_barang' => $input['nama_barang'],
                 'harga_barang' => $input['harga_barang'],
                 'satuan' => $input['satuan'],
-                'status' => $input['status']
+                'status' => $input['status'],
+                // 'supplier' => $input['nama_supplier']
             ];
         }
         $model->update($id, $data);

@@ -2,11 +2,11 @@
 
 namespace App\Controllers\API;
 
-use App\Models\TransaksiDetailModel;
+use App\Models\PengeluaranDetailModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
-class TransaksiDetail extends ResourceController
+class PengeluaranDetail extends ResourceController
 {
     /**
      * Return an array of resource objects, themselves in array format
@@ -15,12 +15,12 @@ class TransaksiDetail extends ResourceController
      */
     public function index()
     {
-        $model = new TransaksiDetailModel();
+        $model = new PengeluaranDetailModel();
         $data = $model->findAll();
         if ($data) {
             return $this->respond($data);
         } else {
-            return $this->failNotFound('Transaksi detail dengan id tersebut tidak ditemukan');
+            return $this->failNotFound('Pengeluaran detail dengan id tersebut tidak ditemukan');
         }
     }
 
@@ -31,8 +31,8 @@ class TransaksiDetail extends ResourceController
      */
     public function show($id = null)
     {
-        $model = new TransaksiDetailModel();
-        $data = $model->getWhere(['id_transaksi_detail'  => $id])->getResult();
+        $model = new PengeluaranDetailModel();
+        $data = $model->getWhere(['id_pengeluaran_detail'  => $id])->getResult();
         return $this->respond($data);
     }
 
@@ -52,7 +52,7 @@ class TransaksiDetail extends ResourceController
      */
     public function create()
     {
-        $model = new TransaksiDetailModel();
+        $model = new PengeluaranDetailModel();
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
@@ -73,7 +73,7 @@ class TransaksiDetail extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Transaksi berhasil ditambah.'
+                'success' => 'Pengeluaran berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);
