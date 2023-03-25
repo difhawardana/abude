@@ -31,22 +31,60 @@ Abude - Data Barang
         <!-- row -->
         <div class="row">
             <div class="col-12">
-                <div id="alert-sukses" class="alert alert-success alert-dismissible fade show">
+                <div id="alert-berhasil-tambah" class="alert alert-success alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
                         <polyline points="9 11 12 14 22 4"></polyline>
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                     </svg>
-                    <strong>Sukses!</strong> Menambah barang.
+                    <strong>Sukses!</strong> Menambah Barang.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
-                <div id="alert-gagal" class="alert alert-danger alert-dismissible fade show">
+                <div id="alert-berhasil-hapus" class="alert alert-success alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <strong>Sukses!</strong> Menghapus Barang.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-berhasil-edit" class="alert alert-success alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <strong>Sukses!</strong> Mengubah Barang.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-tambah" class="alert alert-danger alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
                         <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
                         <line x1="15" y1="9" x2="9" y2="15"></line>
                         <line x1="9" y1="9" x2="15" y2="15"></line>
                     </svg>
-                    <strong>Error!</strong> Gagal menambah data.
+                    <strong>Error!</strong> Gagal menambah Barang.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-hapus" class="alert alert-danger alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <strong>Error!</strong> Gagal menghapus Barang
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-edit" class="alert alert-danger alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <strong>Error!</strong> Gagal mengedit Barang.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
@@ -153,6 +191,16 @@ Abude - Data Barang
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="id_supplier_edit" class="form-label">Supplier</label>
+                                                        <select id="id_supplier_edit" name="id_supplier" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <?php foreach ($supplier as $value) : ?>
+                                                                <option value="<?= $value->id_supplier ?>"><?= $value->nama_supplier ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
@@ -173,6 +221,8 @@ Abude - Data Barang
                                         <th>Nama barang</th>
                                         <th>Harga Barang</th>
                                         <th>Satuan</th>
+                                        <!-- <th>Supplier</th> -->
+                                        <th>Dimuat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -188,26 +238,6 @@ Abude - Data Barang
         </div>
 
         <div class="row">
-            <!-- <div class="col-12">
-                <div id="alert-sukses" class="alert alert-success alert-dismissible fade show">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
-                        <polyline points="9 11 12 14 22 4"></polyline>
-                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                    </svg>
-                    <strong>Sukses!</strong> Menambah barang.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
-                    </button>
-                </div>
-                <div id="alert-gagal" class="alert alert-danger alert-dismissible fade show">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
-                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
-                        <line x1="15" y1="9" x2="9" y2="15"></line>
-                        <line x1="9" y1="9" x2="15" y2="15"></line>
-                    </svg>
-                    <strong>Error!</strong> Gagal menambah data.
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
-                    </button>
-                </div> -->
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title">List Barang di beli
@@ -250,6 +280,16 @@ Abude - Data Barang
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="id_supplier_edit" class="form-label">Supplier</label>
+                                                        <select id="id_supplier_edit" name="id_supplier" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <?php foreach ($supplier as $value) : ?>
+                                                                <option value="<?= $value->id_supplier ?>"><?= $value->nama_supplier ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
@@ -270,6 +310,8 @@ Abude - Data Barang
                                     <th>Nama barang</th>
                                     <th>Harga Barang</th>
                                     <th>Satuan</th>
+                                    <!-- <th>Supplier</th> -->
+                                    <th>Dimuat</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -288,24 +330,24 @@ Abude - Data Barang
 </div>
 <?= $this->endSection() ?>
 
+
+
 <!-- Section Javascript -->
 <?= $this->section('script') ?>
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
-<script src="<?= base_url() ?>assets/js/dashboard/dashboard-1.js"></script>
-<script src="<?= base_url() ?>assets/vendor/owl-carousel/owl.carousel.js"></script>
-<script src="<?= base_url() ?>assets/js/deznav-init.js"></script>
-<script src="<?= base_url() ?>assets/js/demo.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#alert-sukses').hide();
-        $('#alert-gagal').hide();
-
-
-
+   $(document).ready(function() {
+        $('#alert-berhasil-tambah').hide();
+        $('#alert-berhasil-hapus').hide();
+        $('#alert-berhasil-edit').hide();
+        $('#alert-gagal-tambah').hide();
+        $('#alert-gagal-hapus').hide();
+        $('#alert-gagal-edit').hide();
     });
 
-    var table = $('#table_barang_dijual').DataTable({
+  
+    var table1 = $('#table_barang_dijual').DataTable({
         ajax: {
             url: '<?= base_url() ?>API/Barang/Dijual',
             dataSrc: "",
@@ -325,6 +367,12 @@ Abude - Data Barang
             {
                 data: 'satuan'
             },
+            // {
+            //     data: nama_supplier
+            // },
+            {
+                data: 'created_at'
+            },
             {
                 data: 'id_barang',
                 render: function(data, type, row) {
@@ -337,7 +385,7 @@ Abude - Data Barang
 
     })
 
-    var table = $('#table_barang_dibeli').DataTable({
+    var table2 = $('#table_barang_dibeli').DataTable({
         ajax: {
             url: '<?= base_url() ?>API/Barang/Dibeli',
             dataSrc: '',
@@ -356,6 +404,12 @@ Abude - Data Barang
             },
             {
                 data: 'satuan'
+            },
+            // {
+            //     data: nama_supplier
+            // },
+            {
+                data: 'created_at'
             },
             {
                 data: 'id_barang',
@@ -394,19 +448,24 @@ Abude - Data Barang
         }).done(function(response) {
             $('#modalTambah').modal('toggle');
             if (response.status) {
-                $('#alert-sukses').show();
-            } else {
-                $('#alert-gagal').show();
-            }
-            table.ajax.reload();
+                    $('#alert-berhasil-tambah').show();
+                } else {
+                    $('#alert-gagal-tambah').show();
+                }
+            table1.ajax.reload();
+            table2.ajax.reload();
         })
     }
 
     function hapusData(id) {
-        $.ajax({
+        if (confirm("Yakin untuk menghapus data?") == true) {
+            $.ajax({
                 url: "<?= base_url(); ?>API/Barang/" + id,
                 method: "DELETE",
-                contentType: "application/json"
+                contentType: "application/json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 if (response.status) {
@@ -414,8 +473,13 @@ Abude - Data Barang
                 } else {
                     $('#alert-gagal-hapus').show();
                 }
-                table.ajax.reload();
+                table1.ajax.reload();
+                table2.ajax.reload();
             });
+        } 
+        else {
+            return false;
+        }
     }
 
     function editData(id) {
@@ -423,13 +487,17 @@ Abude - Data Barang
         $.ajax({
                 method: "GET",
                 url: "<?= base_url(); ?>API/Barang/" + id,
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 $('#id_barang_edit').val(response[0].id_barang)
                 $('#nama_barang_edit').val(response[0].nama_barang)
                 $('#harga_barang_edit').val(response[0].harga_barang)
                 $('#satuan_edit').val(response[0].satuan)
+                // $('#supplier').val(response[0].nama_supplier)
             });
     }
 
@@ -440,7 +508,10 @@ Abude - Data Barang
                 url: "<?= base_url(); ?>/API/Barang/" + data_post['id_barang'],
                 contentType: "application/json",
                 data: data_post,
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 $('#modalEdit').modal('toggle');
@@ -449,7 +520,8 @@ Abude - Data Barang
                 } else {
                     $('#alert-gagal-edit').show();
                 }
-                table.ajax.reload();
+                table1.ajax.reload();
+                table2.ajax.reload();
             });
     }
 </script>

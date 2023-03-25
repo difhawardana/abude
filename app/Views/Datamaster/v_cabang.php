@@ -35,7 +35,7 @@ Abude - Data Cabang
         <!-- row -->
         <div class="row">
             <div class="col-12">
-                <div id="alert-sukses" class="alert alert-success alert-dismissible fade show">
+            <div id="alert-berhasil-tambah" class="alert alert-success alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
                         <polyline points="9 11 12 14 22 4"></polyline>
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
@@ -44,13 +44,51 @@ Abude - Data Cabang
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
-                <div id="alert-gagal" class="alert alert-danger alert-dismissible fade show">
+                <div id="alert-berhasil-hapus" class="alert alert-success alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <strong>Sukses!</strong> Menghapus Cabang.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-berhasil-edit" class="alert alert-success alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <strong>Sukses!</strong> Mengubah Cabang.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-tambah" class="alert alert-danger alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
                         <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
                         <line x1="15" y1="9" x2="9" y2="15"></line>
                         <line x1="9" y1="9" x2="15" y2="15"></line>
                     </svg>
-                    <strong>Error!</strong> Gagal menambah data.
+                    <strong>Error!</strong> Gagal menambah Cabang.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-hapus" class="alert alert-danger alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <strong>Error!</strong> Gagal menghapus Cabang
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-edit" class="alert alert-danger alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <strong>Error!</strong> Gagal mengedit Cabang.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
@@ -136,6 +174,7 @@ Abude - Data Cabang
                                     <tr>
                                         <th>Nama cabang</th>
                                         <th>Kode</th>
+                                        <th>Dimuat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -155,22 +194,25 @@ Abude - Data Cabang
 
 <!-- Section Javascript -->
 <?= $this->section('script') ?>
-<script src="<?= base_url() ?>assets/vendor/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="<?= base_url() ?>assets/js/plugins-init/sweetalert.init.js"></script>
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#alert-sukses').hide();
-        $('#alert-gagal').hide();
-
-
+        $('#alert-berhasil-tambah').hide();
+        $('#alert-berhasil-hapus').hide();
+        $('#alert-berhasil-edit').hide();
+        $('#alert-gagal-tambah').hide();
+        $('#alert-gagal-hapus').hide();
+        $('#alert-gagal-edit').hide();
     });
 
     var table = $('#table_cabang').DataTable({
         ajax: {
             url: '<?= base_url() ?>API/Cabang',
-            dataSrc: ''
+            dataSrc: '',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
         },
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -180,6 +222,9 @@ Abude - Data Cabang
             },
             {
                 data: 'kode'
+            },
+            {
+                data: 'created_at'
             },
             {
                 data: 'id_cabang',
@@ -211,23 +256,30 @@ Abude - Data Cabang
             method: "POST",
             url: "<?= base_url() ?>API/Cabang",
             data: data_post,
-            dataType: "json"
+            dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
         }).done(function(response) {
             $('#modalTambah').modal('toggle');
             if (response.status) {
-                $('#alert-sukses').show();
-            } else {
-                $('#alert-gagal').show();
-            }
+                    $('#alert-berhasil-tambah').show();
+                } else {
+                    $('#alert-gagal-tambah').show();
+                }
             table.ajax.reload();
         })
     }
 
     function hapusData(id) {
-        $.ajax({
+        if (confirm("Yakin untuk menghapus data?") == true) {
+            $.ajax({
                 url: "<?= base_url(); ?>API/Cabang/" + id,
                 method: "DELETE",
-                contentType: "application/json"
+                contentType: "application/json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 if (response.status) {
@@ -237,6 +289,10 @@ Abude - Data Cabang
                 }
                 table.ajax.reload();
             });
+        } 
+        else {
+            return false;
+        }
     }
 
     function editData(id) {
@@ -244,7 +300,10 @@ Abude - Data Cabang
         $.ajax({
                 method: "GET",
                 url: "<?= base_url(); ?>API/Cabang/" + id,
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 $('#id_cabang_edit').val(response[0].id_cabang)
@@ -260,7 +319,10 @@ Abude - Data Cabang
                 url: "<?= base_url(); ?>/API/Cabang/" + data_post['id_cabang'],
                 contentType: "application/json",
                 data: data_post,
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 $('#modalEdit').modal('toggle');

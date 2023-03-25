@@ -105,7 +105,7 @@
                                             <polyline points="16 17 21 12 16 7"></polyline>
                                             <line x1="21" y1="12" x2="9" y2="12"></line>
                                         </svg>
-                                        <span class="ml-2">Logout </span>
+                                        <span class="ml-2">Keluar </span>
                                     </a>
                                 </div>
                             </li>
@@ -146,22 +146,22 @@
                     </li>
                     <li><a class="has-arrow ai-icon" href="#" aria-expanded="false">
                             <i class="flaticon-381-network"></i>
-                            <span class="nav-text"> Laporan Aktivitas</span>
+                            <span class="nav-text">Laporan Aktivitas</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?= base_url() ?>">Penjualan</a></li>
-                            <li><a href="<?= base_url() ?>">Pengeluaran</a></li>
+                            <li><a href="<?= base_url('Transaksi') ?>">Transaksi</a></li>
+                            <li><a href="<?= base_url('Pengeluaran') ?>">Pengeluaran</a></li>
                         </ul>
                     </li>
                     <?php endif; ?>
                     <?php if (session('role') == 'Owner') : ?>
                         <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
                             <i class="flaticon-381-network"></i>
-                            <span class="nav-text">Aktivitas</span>
+                            <span class="nav-text">Laporan Aktivitas</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?= base_url() ?>">Transaksi</a></li>
-                            <li><a href="<?= base_url() ?>">Pengeluaran</a></li>
+                            <li><a href="<?= base_url('Transaksi') ?>">Transaksi</a></li>
+                            <li><a href="<?= base_url('Pengeluaran') ?>">Pengeluaran</a></li>
                         </ul>
                     </li>
                     <?php endif; ?>

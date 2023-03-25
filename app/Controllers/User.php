@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\Controller;
 use App\Models\UserModel;
 
 class User extends BaseController

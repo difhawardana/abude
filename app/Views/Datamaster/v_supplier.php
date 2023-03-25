@@ -33,7 +33,7 @@ Abude - List Supplier
         <!-- row -->
         <div class="row">
             <div class="col-12">
-                <div id="alert-sukses" class="alert alert-success alert-dismissible fade show">
+                <div id="alert-berhasil-tambah" class="alert alert-success alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
                         <polyline points="9 11 12 14 22 4"></polyline>
                         <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
@@ -42,13 +42,51 @@ Abude - List Supplier
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
-                <div id="alert-gagal" class="alert alert-danger alert-dismissible fade show">
+                <div id="alert-berhasil-hapus" class="alert alert-success alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <strong>Sukses!</strong> Menghapus Supplier.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-berhasil-edit" class="alert alert-success alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polyline points="9 11 12 14 22 4"></polyline>
+                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    <strong>Sukses!</strong> Mengubah Supplier.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-tambah" class="alert alert-danger alert-dismissible fade show">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
                         <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
                         <line x1="15" y1="9" x2="9" y2="15"></line>
                         <line x1="9" y1="9" x2="15" y2="15"></line>
                     </svg>
-                    <strong>Error!</strong> Gagal menambah data.
+                    <strong>Error!</strong> Gagal menambah Supplier.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-hapus" class="alert alert-danger alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <strong>Error!</strong> Gagal menghapus Supplier
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
+                    </button>
+                </div>
+                <div id="alert-gagal-edit" class="alert alert-danger alert-dismissible fade show">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                    <strong>Error!</strong> Gagal mengedit Supplier.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="btn-close">
                     </button>
                 </div>
@@ -120,6 +158,7 @@ Abude - List Supplier
                                 <thead>
                                     <tr>
                                         <th>Nama Supplier</th>
+                                        <th>Dimuat</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -142,17 +181,23 @@ Abude - List Supplier
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
+    
     $(document).ready(function() {
-        $('#alert-sukses').hide();
-        $('#alert-gagal').hide();
-
-
+        $('#alert-berhasil-tambah').hide();
+        $('#alert-berhasil-hapus').hide();
+        $('#alert-berhasil-edit').hide();
+        $('#alert-gagal-tambah').hide();
+        $('#alert-gagal-hapus').hide();
+        $('#alert-gagal-edit').hide();
     });
 
     var table = $('#table_supplier').DataTable({
         ajax: {
             url: '<?= base_url() ?>API/Supplier',
-            dataSrc: ''
+            dataSrc: '',
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
         },
         dataType: 'json',
         contentType: 'application/json; charset=utf-8',
@@ -160,6 +205,9 @@ Abude - List Supplier
         columns: [
             {
                 data: 'nama_supplier'
+            },
+            {
+                data: 'created_at'
             },
             {
                 data: 'id_supplier',
@@ -191,23 +239,30 @@ Abude - List Supplier
             method: "POST",
             url: "<?= base_url() ?>API/Supplier",
             data: data_post,
-            dataType: "json"
+            dataType: "json",
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
         }).done(function(response) {
             $('#modalTambah').modal('toggle');
             if (response.status) {
-                $('#alert-sukses').show();
-            } else {
-                $('#alert-gagal').show();
-            }
+                    $('#alert-berhasil-tambah').show();
+                } else {
+                    $('#alert-gagal-tambah').show();
+                }
             table.ajax.reload();
         })
     }
 
     function hapusData(id) {
-        $.ajax({
+        if (confirm("Yakin untuk menghapus data?") == true) {
+            $.ajax({
                 url: "<?= base_url(); ?>API/Supplier/" + id,
                 method: "DELETE",
-                contentType: "application/json"
+                contentType: "application/json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 if (response.status) {
@@ -217,6 +272,10 @@ Abude - List Supplier
                 }
                 table.ajax.reload();
             });
+        } 
+        else {
+            return false;
+        }
     }
 
     function editData(id) {
@@ -224,7 +283,10 @@ Abude - List Supplier
         $.ajax({
                 method: "GET",
                 url: "<?= base_url(); ?>API/Supplier/" + id,
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 $('#id_supplier_edit').val(response[0].id_supplier)
@@ -239,7 +301,10 @@ Abude - List Supplier
                 url: "<?= base_url(); ?>/API/Supplier/" + data_post['id_supplier'],
                 contentType: "application/json",
                 data: data_post,
-                dataType: "json"
+                dataType: "json",
+                beforeSend: function(xhr) {
+                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+            }
             })
             .done(function(response) {
                 $('#modalEdit').modal('toggle');
@@ -251,6 +316,7 @@ Abude - List Supplier
                 table.ajax.reload();
             });
     }
+
 </script>
 
 

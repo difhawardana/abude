@@ -27,7 +27,7 @@ class User extends ResourceController
     public function show($id = null)
     {
         $model = new UserModel();
-        $user = $model->where('id', $id)->first();
+        $user = $model->getwhere('id_user', $id)->getResult();
         if ($user) {
             return $this->respond($user);
         } else {
@@ -101,35 +101,31 @@ class User extends ResourceController
      */
     public function update($id = null)
     {
-        if (!$this->validate([
-            'username' => 'permit_empty|is_unique[m_users.username,id,' . $id . ']',
-            'password' => 'permit_empty',
-            'role' => 'permit_empty',
-            // 'id_cabang' => 'permit_empty',
-            // 'id_perusahaan' => 'permit_empty',
-        ])) {
-            return $this->response->setJSON(['success' => false, "message" => \Config\Services::validation()->getErrors()]);
-        }
-
         $model = new UserModel();
-        $exist = $model->where('id', $id)->first();
-
-        if (!$exist) {
-            return $this->response->setJSON(['success' => false, "message" => 'User tidak ditemukan']);
+        $json = $this->request->getJSON();
+        if ($json) {
+            $data = [
+                'username' => $json->username,
+                'password' => md5($json->password),
+                'role' => $json->role,
+            ];
+        } else {
+            $input = $this->request->getRawInput();
+            $data = [
+                'username' => $input['username'],
+                'password' => md5($input['password']),
+                'role' => $input['role'],
+            ];
         }
-
-        $update = [
-            'username' => $this->request->getVar('username') ? $this->request->getVar('username') : $exist['username'],
-            'password' => $this->request->getVar('password') ? password_hash($this->request->getVar('password'), PASSWORD_DEFAULT) : $exist['password'],
-            'role' => $this->request->getVar('role') ? $this->request->getVar('role') : $exist['role'],
-            // 'id_cabang' => $this->request->getVar('id_cabang')  ? $this->request->getVar('id_cabang') : $exist['id_cabang'],
-            // 'id_perusahaan' => $this->request->getVar('id_perusahaan') ? $this->request->getVar('id_perusahaan') : $exist['id_perusahaan']
+        $model->update($id, $data);
+        $response = [
+            'status' => 200,
+            'error' => null,
+            'messages' => [
+                'success' => 'Berhasil mengupdate User!'
+            ],
         ];
-
-        $model = new UserModel;
-        $save  = $model->update($id, $update);
-
-        return $this->response->setJSON(['success' => true, 'message' => 'OK']);
+        return $this->respond($response);
     }
 
     /**

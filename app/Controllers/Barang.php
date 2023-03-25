@@ -32,7 +32,7 @@ class Barang extends BaseController
 			'harga_barang' => $this->request->getVar('harga_barang'),
 			'satuan' => $this->request->getVar('satuan'),
 			'status' => $this->request->getVar('status'),
-			// 'id_cabang' => $this->request->getVar('id_cabang'),
+			'id_cabang' => $this->request->getVar('id_cabang'),
 		];
 
 		$result = $this->barangModel->save($data);
