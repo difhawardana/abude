@@ -17,7 +17,8 @@ Abude - Data Barang
         <div class="row page-titles mx-0">
             <div class="col-sm-6 p-md-0">
                 <div class="welcome-text">
-                    <h4>Selamat datang Kembali!</h4>
+                    <h4>Table Barang <button data-bs-toggle="modal" data-bs-target="#modalTambah" type="button" class="btn btn-rounded btn-primary"><span class="btn-icon-left text-primary"><i class="fa fa-plus color-primary"></i>
+                            </span>Tambah Data</button></h4>
                 </div>
             </div>
             <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
@@ -91,8 +92,8 @@ Abude - Data Barang
                 <div class="card">
                     <div class="card-header">
                         <h5 class="card-title">List Barang di jual
-                            <button data-bs-toggle="modal" data-bs-target="#modalTambah" type="button" class="btn btn-primary">Tambah Data <span class="btn-icon-end"><i class="fa fa-plus"></i></span>
-                            </button>
+
+
                             <!-- Modal -->
                             <div class="modal fade" id="modalTambah">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -221,7 +222,7 @@ Abude - Data Barang
                                         <th>Nama barang</th>
                                         <th>Harga Barang</th>
                                         <th>Satuan</th>
-                                        <!-- <th>Supplier</th> -->
+                                        <th>Supplier</th>
                                         <th>Dimuat</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -238,49 +239,50 @@ Abude - Data Barang
         </div>
 
         <div class="row">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">List Barang di beli
-                        <!-- Modal -->
-                        <div class="modal fade" id="modalEdit">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Edit Barang</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
-                                        </button>
-                                    </div>
-                                    <form id="form-edit" method="post">
-                                        <div class="modal-body">
-                                            <input type="hidden" name="id_barang" id="id_barang_edit">
-                                            <div class="row">
-                                                <div class="col mb-3">
-                                                    <label for="nama_barang_edit" class="form-label">Nama Barang</label>
-                                                    <input type="text" id="nama_barang_edit" name="nama_barang" class="form-control" placeholder="Nama barang" />
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">List Barang di beli
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalEdit">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Barang</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                            </button>
+                                        </div>
+                                        <form id="form-edit" method="post">
+                                            <div class="modal-body">
+                                                <input type="hidden" name="id_barang" id="id_barang_edit">
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="nama_barang_edit" class="form-label">Nama Barang</label>
+                                                        <input type="text" id="nama_barang_edit" name="nama_barang" class="form-control" placeholder="Nama barang" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col mb-3">
-                                                    <label for="harga_barang_edit" class="form-label">Harga Barang (Rupiah)</label>
-                                                    <input type="text" id="harga_barang_edit" name="harga_barang" class="form-control" placeholder="Harga barang" />
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="harga_barang_edit" class="form-label">Harga Barang (Rupiah)</label>
+                                                        <input type="text" id="harga_barang_edit" name="harga_barang" class="form-control" placeholder="Harga barang" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col mb-3">
-                                                    <label for="satuan_edit" class="form-label">Satuan</label>
-                                                    <input type="text" id="satuan_edit" name="satuan" class="form-control" placeholder="Satuan" />
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="satuan_edit" class="form-label">Satuan</label>
+                                                        <input type="text" id="satuan_edit" name="satuan" class="form-control" placeholder="Satuan" />
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col mb-3">
-                                                    <label for="status_edit" class="form-label">Status</label>
-                                                    <select id="status_edit" name="status" class="form-control default-select form-control-lg" tabindex="-98">
-                                                        <option value="Dibeli">Dibeli</option>
-                                                        <option value="Dijual">Dijual</option>
-                                                    </select>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="status_edit" class="form-label">Status</label>
+                                                        <select id="status_edit" name="status" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <option value="Dibeli">Dibeli</option>
+                                                            <option value="Dijual">Dijual</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
+                                                <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="id_supplier_edit" class="form-label">Supplier</label>
                                                         <select id="id_supplier_edit" name="id_supplier" class="form-control default-select form-control-lg" tabindex="-98">
@@ -290,42 +292,42 @@ Abude - Data Barang
                                                         </select>
                                                     </div>
                                                 </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
-                                            <button type="button" onclick="updateData()" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
+                                                <button type="button" onclick="updateData()" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
+                        </h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table" id="table_barang_dibeli" style="min-width: 845px">
+                                <thead>
+                                    <tr>
+                                        <th>Nama barang</th>
+                                        <th>Harga Barang</th>
+                                        <th>Satuan</th>
+                                        <th>Supplier</th>
+                                        <th>Dimuat</th>
+                                        <th>Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0">
+
+                                </tbody>
+                            </table>
                         </div>
-                    </h5>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table" id="table_barang_dibeli" style="min-width: 845px">
-                            <thead>
-                                <tr>
-                                    <th>Nama barang</th>
-                                    <th>Harga Barang</th>
-                                    <th>Satuan</th>
-                                    <!-- <th>Supplier</th> -->
-                                    <th>Dimuat</th>
-                                    <th>Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-border-bottom-0">
-
-                            </tbody>
-                        </table>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
 </div>
 </div>
 <?= $this->endSection() ?>
@@ -335,7 +337,7 @@ Abude - Data Barang
 <script src="<?= base_url() ?>assets/vendor/datatables.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/DataTables-1.13.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
-   $(document).ready(function() {
+    $(document).ready(function() {
         $('#alert-berhasil-tambah').hide();
         $('#alert-berhasil-hapus').hide();
         $('#alert-berhasil-edit').hide();
@@ -364,9 +366,9 @@ Abude - Data Barang
             {
                 data: 'satuan'
             },
-            // {
-            //     data: nama_supplier
-            // },
+            {
+                data: 'nama_supplier'
+            },
             {
                 data: 'created_at'
             },
@@ -402,9 +404,9 @@ Abude - Data Barang
             {
                 data: 'satuan'
             },
-            // {
-            //     data: nama_supplier
-            // },
+            {
+                data: 'nama_supplier'
+            },
             {
                 data: 'created_at'
             },
@@ -445,10 +447,10 @@ Abude - Data Barang
         }).done(function(response) {
             $('#modalTambah').modal('toggle');
             if (response.status) {
-                    $('#alert-berhasil-tambah').show();
-                } else {
-                    $('#alert-gagal-tambah').show();
-                }
+                $('#alert-berhasil-tambah').show();
+            } else {
+                $('#alert-gagal-tambah').show();
+            }
             table1.ajax.reload();
             table2.ajax.reload();
         })
@@ -457,24 +459,23 @@ Abude - Data Barang
     function hapusData(id) {
         if (confirm("Yakin untuk menghapus data?") == true) {
             $.ajax({
-                url: "<?= base_url(); ?>API/Barang/" + id,
-                method: "DELETE",
-                contentType: "application/json",
-                beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
-            }
-            })
-            .done(function(response) {
-                if (response.status) {
-                    $('#alert-berhasil-hapus').show();
-                } else {
-                    $('#alert-gagal-hapus').show();
-                }
-                table1.ajax.reload();
-                table2.ajax.reload();
-            });
-        } 
-        else {
+                    url: "<?= base_url(); ?>API/Barang/" + id,
+                    method: "DELETE",
+                    contentType: "application/json",
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+                    }
+                })
+                .done(function(response) {
+                    if (response.status) {
+                        $('#alert-berhasil-hapus').show();
+                    } else {
+                        $('#alert-gagal-hapus').show();
+                    }
+                    table1.ajax.reload();
+                    table2.ajax.reload();
+                });
+        } else {
             return false;
         }
     }
@@ -486,8 +487,8 @@ Abude - Data Barang
                 url: "<?= base_url(); ?>API/Barang/" + id,
                 dataType: "json",
                 beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
-            }
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+                }
             })
             .done(function(response) {
                 $('#id_barang_edit').val(response[0].id_barang)
@@ -507,8 +508,8 @@ Abude - Data Barang
                 data: data_post,
                 dataType: "json",
                 beforeSend: function(xhr) {
-                xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
-            }
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
+                }
             })
             .done(function(response) {
                 $('#modalEdit').modal('toggle');

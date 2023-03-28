@@ -39,7 +39,7 @@ class Barang extends ResourceController
     public function dibeli()
     {
         $model = new BarangModel();
-        $data = $model->getWhere(['status'  => 'Dibeli'])->getResult();
+        $data = $model->select('id_barang, nama_barang, harga_barang, satuan, status, nama_supplier, barang.created_at')->join('supplier', 'supplier.id_supplier = barang.id_supplier AND barang.status = "Dibeli"')->get()->getResult();
         if ($data) {
             return $this->respond($data);
         } else {
@@ -50,8 +50,7 @@ class Barang extends ResourceController
     public function dijual()
     {
         $model = new BarangModel();
-        // $data = $model->getWhere(['status'  => 'Dijual'])->getResult();
-        $data = $model->select('*')->join('supplier', 'barang.id_supplier = supplier.id_supplier')->get();
+        $data = $model->select('id_barang, nama_barang, harga_barang, satuan, status, nama_supplier, barang.created_at')->join('supplier', 'supplier.id_supplier = barang.id_supplier AND barang.status = "Dijual"')->get()->getResult();
         if ($data) {
             return $this->respond($data);
         } else {
@@ -87,7 +86,7 @@ class Barang extends ResourceController
                 'id_supplier' => $json->id_supplier
             ];
         } else {
-            $input = $this->request->getRawInput(); 
+            $input = $this->request->getRawInput();
             $data = [
                 'nama_barang' => $input['nama_barang'],
                 'harga_barang' => $input['harga_barang'],
