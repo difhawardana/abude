@@ -50,7 +50,8 @@ class Barang extends ResourceController
     public function dijual()
     {
         $model = new BarangModel();
-        $data = $model->getWhere(['status'  => 'Dijual'])->getResult();
+        // $data = $model->getWhere(['status'  => 'Dijual'])->getResult();
+        $data = $model->select('*')->join('supplier', 'barang.id_supplier = supplier.id_supplier')->get();
         if ($data) {
             return $this->respond($data);
         } else {

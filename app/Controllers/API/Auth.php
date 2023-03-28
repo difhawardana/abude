@@ -47,7 +47,7 @@ class Auth extends BaseController
             if (md5($data->password) == $user->password) {
                 $key = getenv('JWT_SECRET');
                 $iat = time(); // current timestamp value
-                $exp = $iat + 3600;
+                $exp = $iat + 21600;
 
                 $payload = array(
                     "iss" => "Issuer of the JWT",

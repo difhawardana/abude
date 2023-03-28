@@ -27,10 +27,11 @@ class User extends ResourceController
     public function show($id = null)
     {
         $model = new UserModel();
-        $user = $model->getwhere('id_user', $id)->getResult();
+        $user = $model->getwhere(['id_user' => $id])->getResult();
         if ($user) {
             return $this->respond($user);
         } else {
+            
             return $this->failNotFound('User dengan id tersebut tidak ditemukan');
         }
     }
