@@ -56,6 +56,8 @@ class PengeluaranDetail extends ResourceController
         $json = $this->request->getJSON();
         if ($json) {
             $data = [
+                'id_pengeluaran' => $json->id_pengeluaran,
+                'id_barang' => $json->id_barang,
                 'jumlah' => $json->jumlah,
                 'harga' => $json->harga,
                 'subtotal' => $json->subtotal,
@@ -63,6 +65,8 @@ class PengeluaranDetail extends ResourceController
         } else {
             $input = $this->request->getRawInput();
             $data = [
+                'id_pengeluaran' => $input['id_pengeluaran'],
+                'id_barang' => $input['id_barang'],
                 'jumlah' => $input['jumlah'],
                 'harga' => $input['harga'],
                 'subtotal' => $input['subtotal'],
@@ -77,6 +81,59 @@ class PengeluaranDetail extends ResourceController
             ]
         ];
         return $this->respondCreated($response, 201);
+    }
+
+    public function update($id = null)
+    {
+        $model = new PengeluaranDetailModel();
+        $json = $this->request->getJSON();
+        if ($json) {
+            $data = [
+                'id_pengeluaran' => $json->id_pengeluaran,
+                'id_barang' => $json->id_barang,
+                'jumlah' => $json->jumlah,
+                'harga' => $json->harga,
+                'subtotal' => $json->subtotal,
+            ];
+        } else {
+            $input = $this->request->getRawInput();
+            $data = [
+                'id_pengeluaran' => $input['id_pengeluaran'],
+                'id_barang' => $input['id_barang'],
+                'jumlah' => $input['jumlah'],
+                'harga' => $input['harga'],
+                'subtotal' => $input['subtotal'],  
+            ];
+        }
+        $model->update($id, $data);
+        $response = [
+            'status' => 200,
+            'error' => null,
+            'messages' => [
+                'success' => 'Berhasil mengupdate Pengeluaran Detail!'
+            ],
+        ];
+        return $this->respond($response);
+    }
+
+    public function delete($id = null)
+    {
+        $model = new PengeluaranDetailModel();
+        $data = $model->find($id);
+        if ($data) {
+            $model->delete($id);
+            $response = [
+                'status' => 200,
+                'error' => null,
+                'messages' => [
+                    'success' => 'Pengeluaran detail berhasil dihapus'
+                ]
+            ];
+
+            return $this->respondDeleted($response);
+        } else {
+            return $this->failNotFound('Pengeluaran detail dengan id tersebut tidak ditemukan!');
+        }
     }
 
     /**

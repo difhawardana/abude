@@ -15,7 +15,7 @@ $validation = \Config\Services::validation();
     <meta name="format-detection" content="telephone=no">
     <title>Abude - Login</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>/assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?= base_url() ?>assets/images/abude_logo.png">
     <link href="<?= base_url() ?>/assets/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="<?= base_url() ?>/assets/css/style.css" rel="stylesheet">
 

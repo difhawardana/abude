@@ -41,6 +41,10 @@ $routes->group('API', ["filter" => "AuthFilter"], function ($routes) {
 	$routes->resource("Perusahaan", ['controller' => 'API\Perusahaan']);
 	$routes->resource("Supplier", ['controller' => 'API\Supplier']);
 	$routes->resource("Perihal", ['controller' => 'API\Perihal']);
+	$routes->resource("Transaksi", ['controller' => 'API\Transaksi']);
+	$routes->resource("TransaksiDetail", ['controller' => 'API\TransaksiDetail']);
+	$routes->resource("Pengeluaran", ['controller' => 'API\Pengeluaran']);
+	$routes->resource("PengeluaranDetail", ['controller' => 'API\PengeluaranDetail']);
 });
 /*
  * --------------------------------------------------------------------
