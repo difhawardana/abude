@@ -155,6 +155,42 @@
                     </li>
                     <?php endif; ?>
                     <?php if (session('role') == 'Owner') : ?>
+                        <li><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                            <i class="flaticon-144-layout"></i>
+                            <span class="nav-text">Data Master</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="<?= base_url('Dashboard')?>">Dashboard</a></li>
+                            <li><a href="<?= base_url('Barang')?>">List Barang</a></li>
+                            <li><a href="<?= base_url('Cabang')?>">List Cabang</a></li>
+                            <li><a href="<?= base_url('User') ?>">User</a></li>
+                            <li><a href="<?= base_url('Supplier')?>">Supplier</a></li>
+                            <li><a href="<?= base_url('Perihal')?>">Perihal</a></li>
+                        </ul>
+                        </li>
+                        <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
+                            <i class="flaticon-381-network"></i>
+                            <span class="nav-text">Laporan Aktivitas</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="<?= base_url('Transaksi') ?>">Transaksi</a></li>
+                            <li><a href="<?= base_url('Pengeluaran') ?>">Pengeluaran</a></li>
+                        </ul>
+                    </li>
+                    <?php endif; ?>
+                    <?php if (session('role') == 'Admin Cabang') : ?>
+                        <li><a class="has-arrow ai-icon" href="#" aria-expanded="false">
+                            <i class="flaticon-144-layout"></i>
+                            <span class="nav-text">Data Master</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="<?= base_url('Dashboard')?>">Dashboard</a></li>
+                            <li><a href="<?= base_url('Barang')?>">List Barang</a></li>
+                            <li><a href="<?= base_url('User') ?>">User</a></li>
+                            <li><a href="<?= base_url('Supplier')?>">Supplier</a></li>
+                            <li><a href="<?= base_url('Perihal')?>">Perihal</a></li>
+                        </ul>
+                        </li>
                         <li><a class="has-arrow ai-icon" href="<?= base_url() ?>assets/javascript:void()" aria-expanded="false">
                             <i class="flaticon-381-network"></i>
                             <span class="nav-text">Laporan Aktivitas</span>
