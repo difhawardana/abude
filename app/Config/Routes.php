@@ -19,7 +19,7 @@ $routes->set404Override();
 // where controller filters or CSRF protection are bypassed.
 // If you don't want to define all routes, please use the Auto Routing (Improved).
 // Set `$autoRoutesImproved` to true in `app/Config/Feature.php` and set the following to true.
-$routes->setAutoRoute(true);
+$routes->setAutoRoute(false);
 
 /*
  * --------------------------------------------------------------------
@@ -30,11 +30,26 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Auth::index');
+$routes->get('/Auth/login', 'Auth::login');
+$routes->get('/Auth/logout', 'Auth::logout');
+$routes->get('/Barang', 'Barang::index');
+$routes->get('/Cabang', 'Cabang::index');
+$routes->get('/Dashboard', 'Dashboard::index');
+$routes->get('/Pengeluaran', 'Pengeluaran::index');
+$routes->get('/Perihal', 'Perihal::index');
+$routes->get('/Perusahaan', 'Perusahaan::index');
+$routes->get('/Supplier', 'Supplier::index');
+$routes->get('/User', 'User::index');
+$routes->get('/Transaksi', 'Transaksi::index');
+
+
 $routes->post('/API/Login', 'API\Auth::login', ['filter' => 'CorsFilter']);
+
 
 $routes->group('API', ["filter" => "AuthFilter"], function ($routes) {
 	$routes->get('Barang/Dibeli', 'API\Barang::dibeli');
 	$routes->get('Barang/Dijual', 'API\Barang::dijual');
+	$routes->get('User/table', 'API\User::table');
 	$routes->resource("Barang", ['controller' => 'API\Barang']);
 	$routes->resource("Cabang", ['controller' => 'API\Cabang']);
 	$routes->resource("User", ['controller' => 'API\User']);

@@ -4,34 +4,17 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use CodeIgniter\Controller;
-use App\Models\UserModel;
+use App\Models\CabangModel;
+
 
 class User extends BaseController
 {
-    public function __construct()
-	{
-		helper(['form', 'url']);
-		$this->userModel = new UserModel();
-	}
-
     public function index()
     {
-        return view("Datamaster/v_user");
-    }
-
-    public function store()
-	{
+		$cabang = new CabangModel();
 		$data = [
-			'username' => $this->request->getVar('username'),
-			'password' => md5($this->request->getVar('password')),
-			'role' => $this->request->getVar('role'),
+			'cabang' => $cabang->select('id_cabang, nama',)->findAll()
 		];
-
-		$result = $this->userModel->save($data);
-		if ($result) {
-			return $this->response->setJSON(['status' => 'success', 'message' => 'Berhasil menambahkan barang']);
-		}
-		return $this->response->setJSON(['status' => 'failed', 'message' => 'Gagal menambahkan barang']);
-	}
-
+        return view("Datamaster/v_user", $data);
+    }
 }

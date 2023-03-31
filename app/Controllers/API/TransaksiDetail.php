@@ -77,7 +77,7 @@ class TransaksiDetail extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Transaksi berhasil ditambah.'
+                'success' => 'Transaksi detail berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);

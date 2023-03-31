@@ -67,25 +67,6 @@
         <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
-                <!-- <div class="btn-group show" role="group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="flaticon-144-layout"></i> Data Master</button>
-                                    <div class="dropdown-menu show" x-placement="bottom-end" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
-                                    <a class="dropdown-item" href="<?= base_url('Dashboard')?>">Dashboard</a>
-                                    <a class="dropdown-item" href="<?= base_url('Barang')?>">List Barang</a>
-                                    <a class="dropdown-item" href="<?= base_url('Cabang')?>">List Cabang</a>
-                                    <a class="dropdown-item" href="<?= base_url('Perusahaan')?>">List Perusahaan</a>
-                                    <a class="dropdown-item" href="<?= base_url('User') ?>">User</a>
-                                    <a class="dropdown-item" href="<?= base_url('Supplier')?>">Supplier</a>
-                                    <a class="dropdown-item" href="<?= base_url('Perihal')?>">Perihal</a>
-                                    </div>
-                                </div>
-                                <div class="btn-group show" role="group">
-                                    <button type="button-start" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="flaticon-381-network"></i> Laporan Aktivitas</button>
-                                    <div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 42px, 0px);">
-                                    <a class="dropdown-item" href="#">Penjualan</a>
-                                    <a class="dropdown-item" href="#">Pembelian</a>
-                                    </div>
-                                </div> -->
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                         </div>
@@ -186,7 +167,7 @@
                         <ul aria-expanded="false">
                             <li><a href="<?= base_url('Dashboard')?>">Dashboard</a></li>
                             <li><a href="<?= base_url('Barang')?>">List Barang</a></li>
-                            <li><a href="<?= base_url('User') ?>">User</a></li>
+                            <!-- <li><a href="<?= base_url('User') ?>">User</a></li> -->
                             <li><a href="<?= base_url('Supplier')?>">Supplier</a></li>
                             <li><a href="<?= base_url('Perihal')?>">Perihal</a></li>
                         </ul>

@@ -77,7 +77,7 @@ class PengeluaranDetail extends ResourceController
             'status'   => 201,
             'error'    => null,
             'messages' => [
-                'success' => 'Pengeluaran berhasil ditambah.'
+                'success' => 'Pengeluaran detail berhasil ditambah.'
             ]
         ];
         return $this->respondCreated($response, 201);

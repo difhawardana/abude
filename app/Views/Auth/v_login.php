@@ -107,7 +107,7 @@ $validation = \Config\Services::validation();
                 dataType: "json",
                 success: function(response) {
                     if (response.success) {
-                        window.location.href = "<?php echo base_url() ?>dashboard";
+                        window.location.href = "<?php echo base_url() ?>Dashboard";
                     } else {
                         console.log(response);
                     }

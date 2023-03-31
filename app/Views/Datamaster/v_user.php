@@ -107,7 +107,6 @@ Abude - Data User
                                         <form id="form-tambah" method="post">
                                             <div class="modal-body">
                                                 <input type="hidden" name="id_perusahaan" value="<?= session('id_perusahaan') ?>">
-                                                <input type="hidden" name="id_cabang" value="<?= session('id_cabang') ?>">
                                                 <div class="row">
                                                     <div class="col mb-3">
                                                         <label for="username" class="form-label">Username</label>
@@ -127,6 +126,14 @@ Abude - Data User
                                                             <option value="SuperAdmin">SuperAdmin</option>
                                                             <option value="Owner">Owner</option>
                                                             <option value="Admin Cabang">Admin Cabang</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col mb-3">
+                                                        <label for="id_cabang" class="form-label">Cabang</label>
+                                                        <select id="id_cabang" name="id_cabang" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <?php foreach ($cabang as $value) : ?>
+                                                                <option value="<?= $value['id_cabang'] ?>"><?= $value['nama'] ?></option>
+                                                            <?php endforeach; ?>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -174,6 +181,16 @@ Abude - Data User
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col mb-3">
+                                                        <label for="id_cabang_edit" class="form-label">Cabang</label>
+                                                        <select id="id_cabang_edit" name="id_cabang" class="form-control default-select form-control-lg" tabindex="-98">
+                                                            <?php foreach ($cabang as $value) : ?>
+                                                                <option value="<?= $value['id_cabang'] ?>"><?= $value['nama'] ?></option>
+                                                            <?php endforeach; ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Tutup</button>
@@ -194,6 +211,7 @@ Abude - Data User
                                         <th>Username</th>
                                         <th>Password</th>
                                         <th>Role</th>
+                                        <th>Cabang</th>
                                         <th>Dimuat</th>
                                         <th>Aksi</th>
                                     </tr>
@@ -228,7 +246,7 @@ Abude - Data User
 
     var table = $('#table_user').DataTable({
         ajax: {
-            url: '<?= base_url() ?>API/User',
+            url: '<?= base_url() ?>API/User/table',
             dataSrc: '',
             beforeSend: function(xhr) {
                 xhr.setRequestHeader('Authorization', 'Bearer ' + '<?= session('token') ?>');
@@ -245,6 +263,9 @@ Abude - Data User
             },
             {
                 data: 'role'
+            },
+            {
+                data: 'nama'
             },
             {
                 data: 'created_at'
@@ -335,6 +356,7 @@ Abude - Data User
                 $('#username_edit').val(response[0].username)
                 $('#password_edit').val(response[0].password)
                 $('#role_edit').val(response[0].role)
+                $('#id_cabang_edit').val(response[0].id_cabang)
             });
     }
 

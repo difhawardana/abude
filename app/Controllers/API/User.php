@@ -36,6 +36,17 @@ class User extends ResourceController
         }
     }
 
+    public function table()
+    {
+        $model = new UserModel();
+        $data = $model->select('id_user, username, password, role, nama, user.created_at')->join('cabang', 'cabang.id_cabang = user.id_cabang')->get()->getResult();
+        if ($data) {
+            return $this->respond($data);
+        } else {
+            return $this->failNotFound('User pada cabang tersebut tidak ditemukan');
+        }
+    }
+
     /**
      * Return a new resource object, with default properties
      *
@@ -109,6 +120,7 @@ class User extends ResourceController
                 'username' => $json->username,
                 'password' => md5($json->password),
                 'role' => $json->role,
+                'id_cabang' => $json->id_cabang,
             ];
         } else {
             $input = $this->request->getRawInput();
@@ -116,6 +128,7 @@ class User extends ResourceController
                 'username' => $input['username'],
                 'password' => md5($input['password']),
                 'role' => $input['role'],
+                'id_cabang' => $input['id_cabang'],
             ];
         }
         $model->update($id, $data);

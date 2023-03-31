@@ -495,7 +495,8 @@ Abude - Data Barang
                 $('#nama_barang_edit').val(response[0].nama_barang)
                 $('#harga_barang_edit').val(response[0].harga_barang)
                 $('#satuan_edit').val(response[0].satuan)
-                // $('#supplier').val(response[0].nama_supplier)
+                $('#status_edit').val(response[0].status)
+                $('#supplier_edit').val(response[0].id_supplier)
             });
     }
 
